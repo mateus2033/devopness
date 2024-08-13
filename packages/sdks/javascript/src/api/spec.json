@@ -13138,7 +13138,7 @@
             "$ref": "#/components/schemas/ServerList"
           },
           "credential": {
-            "$ref": "#/components/schemas/Credential"
+            "$ref": "#/components/schemas/CredentialRelation"
           },
           "virtual_hosts": {
             "$ref": "#/components/schemas/VirtualHostList"
@@ -17024,6 +17024,9 @@
           "environment": {
             "$ref": "#/components/schemas/EnvironmentRelation"
           },
+          "credential": {
+            "$ref": "#/components/schemas/CredentialRelation"
+          },
           "last_action": {
             "$ref": "#/components/schemas/ActionRelation"
           },
@@ -17047,6 +17050,7 @@
           "created_by_user",
           "project",
           "environment",
+          "credential",
           "last_action",
           "created_at",
           "updated_at"
@@ -18302,27 +18306,33 @@
         ]
       },
       "ProviderType": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "cloud_provider"
-          },
-          "type_human_readable": {
-            "type": "string",
-            "example": "Cloud Provider"
-          }
-        },
-        "required": [
-          "type",
-          "type_human_readable"
-        ]
+        "description": "Type of provider.",
+        "type": "string",
+        "enum": [
+          "cloud_provider",
+          "source_provider"
+        ],
+        "example": "cloud_provider"
       },
       "ProviderTypeList": {
         "type": "array",
         "description": "The list of supported provider types",
         "items": {
-          "$ref": "#/components/schemas/ProviderType"
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "cloud_provider"
+            },
+            "type_human_readable": {
+              "type": "string",
+              "example": "Cloud Provider"
+            }
+          },
+          "required": [
+            "type",
+            "type_human_readable"
+          ]
         }
       },
       "RelatedAction": {
@@ -19069,6 +19079,9 @@
           "environment": {
             "$ref": "#/components/schemas/EnvironmentRelation"
           },
+          "credential": {
+            "$ref": "#/components/schemas/CredentialRelation"
+          },
           "created_at": {
             "description": "The date and time when the record was created",
             "type": "string",
@@ -19101,6 +19114,7 @@
           "project",
           "last_action",
           "environment",
+          "credential",
           "created_at",
           "updated_at"
         ]
@@ -20795,6 +20809,9 @@
           "network": {
             "$ref": "#/components/schemas/NetworkRelation"
           },
+          "credential": {
+            "$ref": "#/components/schemas/CredentialRelation"
+          },
           "last_action": {
             "$ref": "#/components/schemas/ActionRelation"
           },
@@ -20819,6 +20836,7 @@
           "project",
           "environment",
           "network",
+          "credential",
           "last_action",
           "created_at",
           "updated_at"

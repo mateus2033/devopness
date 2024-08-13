@@ -13,7 +13,7 @@
 
 
 import { ApplicationLastDeployments } from './application-last-deployments';
-import { Credential } from './credential';
+import { CredentialRelation } from './credential-relation';
 import { DaemonRelation } from './daemon-relation';
 import { EnvironmentRelation } from './environment-relation';
 import { ServerRelation } from './server-relation';
@@ -148,10 +148,10 @@ export interface Application {
     servers: Array<ServerRelation>;
     /**
      * 
-     * @type {Credential}
+     * @type {CredentialRelation}
      * @memberof Application
      */
-    credential: Credential;
+    credential: CredentialRelation | null;
     /**
      * 
      * @type {Array<VirtualHostRelation>}

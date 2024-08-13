@@ -13,7 +13,6 @@
 
 
 import { CredentialProviderType } from './credential-provider-type';
-import { ProviderType } from './provider-type';
 
 /**
  * 
@@ -23,10 +22,10 @@ import { ProviderType } from './provider-type';
 export interface CredentialOptions {
     /**
      * The list of supported provider types
-     * @type {Array<ProviderType>}
+     * @type {Array<object>}
      * @memberof CredentialOptions
      */
-    provider_types: Array<ProviderType>;
+    provider_types: Array<object>;
     /**
      * The list of supported providers
      * @type {Array<CredentialProviderType>}

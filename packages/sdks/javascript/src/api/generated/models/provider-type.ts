@@ -14,22 +14,13 @@
 
 
 /**
- * 
+ * Type of provider.
  * @export
- * @interface ProviderType
+ * @enum {string}
  */
-export interface ProviderType {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProviderType
-     */
-    type: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProviderType
-     */
-    type_human_readable: string;
+export enum ProviderType {
+    CloudProvider = 'cloud_provider',
+    SourceProvider = 'source_provider'
 }
+
 
