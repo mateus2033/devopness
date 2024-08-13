@@ -12,19 +12,24 @@
  */
 
 
-import { SubnetProvisionInputSettings } from './subnet-provision-input-settings';
 
 /**
- * Subnet provision input parameters
+ * 
  * @export
- * @interface SubnetProvisionInput
+ * @interface ProviderType
  */
-export interface SubnetProvisionInput {
+export interface ProviderType {
     /**
      * 
-     * @type {SubnetProvisionInputSettings}
-     * @memberof SubnetProvisionInput
+     * @type {string}
+     * @memberof ProviderType
      */
-    settings: SubnetProvisionInputSettings;
+    type: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderType
+     */
+    type_human_readable: string;
 }
 

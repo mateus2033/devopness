@@ -13,10 +13,10 @@
 
 
 import { ApplicationLastDeployments } from './application-last-deployments';
+import { Credential } from './credential';
 import { DaemonRelation } from './daemon-relation';
 import { EnvironmentRelation } from './environment-relation';
 import { ServerRelation } from './server-relation';
-import { SourceProvider } from './source-provider';
 import { UserRelation } from './user-relation';
 import { VirtualHostRelation } from './virtual-host-relation';
 
@@ -57,7 +57,7 @@ export interface Application {
      */
     name: string;
     /**
-     * The full name of a repository (`repository_owner/repository_name`) containing the application source code. Required when the `source_provider_id` field is informed.
+     * The full name of a repository (`repository_owner/repository_name`) containing the application source code.
      * @type {string}
      * @memberof Application
      */
@@ -148,10 +148,10 @@ export interface Application {
     servers: Array<ServerRelation>;
     /**
      * 
-     * @type {SourceProvider}
+     * @type {Credential}
      * @memberof Application
      */
-    source_provider: SourceProvider;
+    credential: Credential;
     /**
      * 
      * @type {Array<VirtualHostRelation>}

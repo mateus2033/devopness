@@ -27,6 +27,9 @@
       "get": {
         "summary": "Return a list of all actions belonging to current user",
         "operationId": "listActions",
+        "description": {
+          "$ref": "../spec/descriptions/list-actions.md"
+        },
         "tags": [
           "Actions"
         ],
@@ -73,6 +76,9 @@
       "get": {
         "summary": "List actions triggered to a given action target resource",
         "operationId": "listActionsByTargetResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-actions-by-target-resource-type.md"
+        },
         "tags": [
           "Actions"
         ],
@@ -140,6 +146,9 @@
       "get": {
         "summary": "Get an action by ID",
         "operationId": "getAction",
+        "description": {
+          "$ref": "../spec/descriptions/get-action.md"
+        },
         "tags": [
           "Actions"
         ],
@@ -193,6 +202,9 @@
       "post": {
         "summary": "Retry an action",
         "operationId": "retryAction",
+        "description": {
+          "$ref": "../spec/descriptions/retry-action.md"
+        },
         "tags": [
           "Actions"
         ],
@@ -246,6 +258,9 @@
       "get": {
         "summary": "Get action target step log",
         "operationId": "getActionLog",
+        "description": {
+          "$ref": "../spec/descriptions/get-action-log.md"
+        },
         "tags": [
           "Actions - Logs"
         ],
@@ -311,6 +326,9 @@
       "get": {
         "summary": "List resource actions of an action type",
         "operationId": "listActionsByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-actions-by-resource-type.md"
+        },
         "tags": [
           "Actions"
         ],
@@ -378,6 +396,9 @@
       "delete": {
         "summary": "Delete a given application",
         "operationId": "deleteApplication",
+        "description": {
+          "$ref": "../spec/descriptions/delete-application.md"
+        },
         "tags": [
           "Applications"
         ],
@@ -430,6 +451,9 @@
       "get": {
         "summary": "Get an application by ID",
         "operationId": "getApplication",
+        "description": {
+          "$ref": "../spec/descriptions/get-application.md"
+        },
         "tags": [
           "Applications"
         ],
@@ -481,6 +505,9 @@
       "put": {
         "summary": "Update an existing application",
         "operationId": "updateApplication",
+        "description": {
+          "$ref": "../spec/descriptions/update-application.md"
+        },
         "tags": [
           "Applications"
         ],
@@ -538,6 +565,9 @@
       "post": {
         "summary": "Trigger a new deployment for current application",
         "operationId": "addApplicationDeployment",
+        "description": {
+          "$ref": "../spec/descriptions/add-application-deployment.md"
+        },
         "tags": [
           "Applications - Deployments"
         ],
@@ -613,6 +643,9 @@
       "get": {
         "summary": "List all hooks in an application",
         "operationId": "listApplicationHooks",
+        "description": {
+          "$ref": "../spec/descriptions/list-application-hooks.md"
+        },
         "tags": [
           "Applications - Hooks"
         ],
@@ -670,6 +703,9 @@
       "get": {
         "summary": "Return a list of variables belonging to an application",
         "operationId": "listApplicationVariables",
+        "description": {
+          "$ref": "../spec/descriptions/list-application-variables.md"
+        },
         "tags": [
           "Applications - Variables"
         ],
@@ -726,6 +762,9 @@
       "post": {
         "summary": "Create a new variable linked to an application",
         "operationId": "addApplicationVariable",
+        "description": {
+          "$ref": "../spec/descriptions/add-application-variable.md"
+        },
         "tags": [
           "Applications - Variables"
         ],
@@ -797,183 +836,13 @@
         "deprecated": true
       }
     },
-    "/cloud-providers/{cloud_provider_code}/credentials": {
-      "get": {
-        "summary": "List credentials of the given cloud provider",
-        "operationId": "listCloudProviderCredentialsByCloudProviderCode",
-        "tags": [
-          "Cloud Providers - Credentials"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "$ref": "#/components/parameters/pageNumber"
-          },
-          {
-            "$ref": "#/components/parameters/pageSize"
-          },
-          {
-            "in": "path",
-            "name": "cloud_provider_code",
-            "description": "The cloud provider code.",
-            "example": "aws",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CredentialList"
-                }
-              }
-            },
-            "headers": {
-              "Link": {
-                "schema": {
-                  "type": "string"
-                },
-                "description": "Link header with `first`, `last`, `previous` and `next` page's links"
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Add a cloud provider credential",
-        "operationId": "addCloudProviderCredential",
-        "tags": [
-          "Cloud Providers - Credentials"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "in": "path",
-            "name": "cloud_provider_code",
-            "description": "The cloud provider code.",
-            "example": "aws",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Credential"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden/Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity/Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "description": "A JSON object containing the resource data",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CredentialCloudProviderCreate"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/credentials": {
-      "get": {
-        "summary": "List credentials",
-        "operationId": "listCredentials",
-        "tags": [
-          "Credentials"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "$ref": "#/components/parameters/pageNumber"
-          },
-          {
-            "$ref": "#/components/parameters/pageSize"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CredentialList"
-                }
-              }
-            },
-            "headers": {
-              "Link": {
-                "schema": {
-                  "type": "string"
-                },
-                "description": "Link header with `first`, `last`, `previous` and `next` page's links"
-              }
-            }
-          }
-        }
-      }
-    },
     "/credentials/{credential_id}": {
       "delete": {
         "summary": "Delete a given credential",
         "operationId": "deleteCredential",
+        "description": {
+          "$ref": "../spec/descriptions/delete-credential.md"
+        },
         "tags": [
           "Credentials"
         ],
@@ -1011,6 +880,9 @@
       "get": {
         "summary": "Get a credential by ID",
         "operationId": "getCredential",
+        "description": {
+          "$ref": "../spec/descriptions/get-credential.md"
+        },
         "tags": [
           "Credentials"
         ],
@@ -1051,12 +923,153 @@
             "description": "The specified resource was not found"
           }
         }
+      },
+      "put": {
+        "summary": "Update an existing Credential",
+        "operationId": "updateCredential",
+        "description": {
+          "$ref": "../spec/descriptions/update-credential.md"
+        },
+        "tags": [
+          "Credentials"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "in": "path",
+            "name": "credential_id",
+            "description": "The ID of the credential.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden/Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity/Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "A JSON object containing the resource data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialUpdate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credentials/{credential_id}/get-status": {
+      "post": {
+        "summary": "Get current status of a credential on its provider",
+        "operationId": "getStatusCredential",
+        "description": {
+          "$ref": "../spec/descriptions/get-status-credential.md"
+        },
+        "tags": [
+          "Credentials"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "in": "path",
+            "name": "credential_id",
+            "description": "The ID of the credential.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "X-Devopness-Action-Id": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "The dispatched action ID of the resource"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden/Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found"
+          },
+          "422": {
+            "description": "Unprocessable Entity/Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/cron-jobs/{cron_job_id}": {
       "delete": {
         "summary": "Delete a given Cron Job",
         "operationId": "deleteCronJob",
+        "description": {
+          "$ref": "../spec/descriptions/delete-cron-job.md"
+        },
         "tags": [
           "Cron Jobs"
         ],
@@ -1109,6 +1122,9 @@
       "get": {
         "summary": "Get a Cron Job by ID",
         "operationId": "getCronJob",
+        "description": {
+          "$ref": "../spec/descriptions/get-cron-job.md"
+        },
         "tags": [
           "Cron Jobs"
         ],
@@ -1160,6 +1176,9 @@
       "put": {
         "summary": "Update an existing Cron Job",
         "operationId": "updateCronJob",
+        "description": {
+          "$ref": "../spec/descriptions/update-cron-job.md"
+        },
         "tags": [
           "Cron Jobs"
         ],
@@ -1227,6 +1246,9 @@
       "delete": {
         "summary": "Delete a given Daemon",
         "operationId": "deleteDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/delete-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1279,6 +1301,9 @@
       "get": {
         "summary": "Get a Daemon by ID",
         "operationId": "getDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/get-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1330,6 +1355,9 @@
       "put": {
         "summary": "Update an existing Daemon",
         "operationId": "updateDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/update-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1397,6 +1425,9 @@
       "post": {
         "summary": "Get current status of a daemon",
         "operationId": "getStatusDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/get-status-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1472,6 +1503,9 @@
       "post": {
         "summary": "Restart a Daemon",
         "operationId": "restartDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/restart-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1547,6 +1581,9 @@
       "post": {
         "summary": "Start a Daemon",
         "operationId": "startDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/start-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1622,6 +1659,9 @@
       "post": {
         "summary": "Stop a Daemon",
         "operationId": "stopDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/stop-daemon.md"
+        },
         "tags": [
           "Daemons"
         ],
@@ -1697,6 +1737,9 @@
       "get": {
         "summary": "Get an environment by ID",
         "operationId": "getEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/get-environment.md"
+        },
         "tags": [
           "Environments"
         ],
@@ -1748,6 +1791,9 @@
       "put": {
         "summary": "Update a given environment",
         "operationId": "updateEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/update-environment.md"
+        },
         "tags": [
           "Environments"
         ],
@@ -1815,6 +1861,9 @@
       "get": {
         "summary": "List environment actions",
         "operationId": "listEnvironmentActions",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-actions.md"
+        },
         "tags": [
           "Environments - Actions"
         ],
@@ -1872,6 +1921,9 @@
       "get": {
         "summary": "List environment actions of a resource type",
         "operationId": "listEnvironmentActionsByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-actions-by-resource-type.md"
+        },
         "tags": [
           "Environments - Actions"
         ],
@@ -1939,6 +1991,9 @@
       "get": {
         "summary": "Return a list of all Applications belonging to an environment",
         "operationId": "listEnvironmentApplications",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-applications.md"
+        },
         "tags": [
           "Environments - Applications"
         ],
@@ -1994,6 +2049,9 @@
       "post": {
         "summary": "Create a new application",
         "operationId": "addEnvironmentApplication",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-application.md"
+        },
         "tags": [
           "Environments - Applications"
         ],
@@ -2058,6 +2116,9 @@
       "post": {
         "summary": "Archive an environment",
         "operationId": "archiveEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/archive-environment.md"
+        },
         "tags": [
           "Environments"
         ],
@@ -2100,10 +2161,217 @@
         }
       }
     },
+    "/environments/{environment_id}/credentials": {
+      "get": {
+        "summary": "Return a list of all Credentials belonging to an environment",
+        "operationId": "listEnvironmentCredentials",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-credentials.md"
+        },
+        "tags": [
+          "Environments - Credentials"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize"
+          },
+          {
+            "in": "path",
+            "name": "environment_id",
+            "description": "The ID of the environment.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CredentialList"
+                }
+              }
+            },
+            "headers": {
+              "Link": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Link header with `first`, `last`, `previous` and `next` page's links"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a Credential to the given environment",
+        "operationId": "addEnvironmentCredential",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-credential.md"
+        },
+        "tags": [
+          "Environments - Credentials"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "in": "path",
+            "name": "environment_id",
+            "description": "The ID of the environment.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Credential"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden/Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity/Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "A JSON object containing the resource data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialEnvironmentCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/environments/{environment_id}/credentials/{provider_code}/settings": {
+      "get": {
+        "summary": "Return provider settings",
+        "operationId": "getEnvironmentCredentialSettings",
+        "description": {
+          "$ref": "../spec/descriptions/get-environment-credential-settings.md"
+        },
+        "tags": [
+          "Environments - Credentials"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "in": "path",
+            "name": "environment_id",
+            "description": "The ID of the environment.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "path",
+            "name": "provider_code",
+            "description": "The code of the provider.",
+            "example": "aws",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CredentialSetting"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden/Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found"
+          }
+        }
+      }
+    },
     "/environments/{environment_id}/cron-jobs": {
       "get": {
         "summary": "Return a list of all Cron Jobs belonging to an environment",
         "operationId": "listEnvironmentCronJobs",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-cron-jobs.md"
+        },
         "tags": [
           "Environments - Cron Jobs"
         ],
@@ -2159,6 +2427,9 @@
       "post": {
         "summary": "Add a Cron Job to the given environment",
         "operationId": "addEnvironmentCronJob",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-cron-job.md"
+        },
         "tags": [
           "Environments - Cron Jobs"
         ],
@@ -2233,6 +2504,9 @@
       "get": {
         "summary": "Return a list of all Daemons belonging to an environment",
         "operationId": "listEnvironmentDaemons",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-daemons.md"
+        },
         "tags": [
           "Environments - Daemons"
         ],
@@ -2288,6 +2562,9 @@
       "post": {
         "summary": "Add a Daemon to the given environment",
         "operationId": "addEnvironmentDaemon",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-daemon.md"
+        },
         "tags": [
           "Environments - Daemons"
         ],
@@ -2362,6 +2639,9 @@
       "get": {
         "summary": "Return a list of all Network Rules belonging to an environment",
         "operationId": "listEnvironmentNetworkRules",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-network-rules.md"
+        },
         "tags": [
           "Environments - Network Rules"
         ],
@@ -2417,6 +2697,9 @@
       "post": {
         "summary": "Add a Network Rule to the given environment",
         "operationId": "addEnvironmentNetworkRule",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-network-rule.md"
+        },
         "tags": [
           "Environments - Network Rules"
         ],
@@ -2491,6 +2774,9 @@
       "get": {
         "summary": "Return a list of all networks belonging to an environment",
         "operationId": "listEnvironmentNetworks",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-networks.md"
+        },
         "tags": [
           "Environments - Networks"
         ],
@@ -2576,6 +2862,9 @@
       "post": {
         "summary": "Create a new network for the given environment",
         "operationId": "addEnvironmentNetwork",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-network.md"
+        },
         "tags": [
           "Environments - Networks"
         ],
@@ -2658,6 +2947,9 @@
       "get": {
         "summary": "Return a list of all servers belonging to an environment",
         "operationId": "listEnvironmentServers",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-servers.md"
+        },
         "tags": [
           "Environments - Servers"
         ],
@@ -2713,6 +3005,9 @@
       "post": {
         "summary": "Creates a server and link it to the given environment",
         "operationId": "addEnvironmentServer",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-server.md"
+        },
         "tags": [
           "Environments - Servers"
         ],
@@ -2795,6 +3090,9 @@
       "get": {
         "summary": "Return a list of all services belonging to a environment",
         "operationId": "listEnvironmentServices",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-services.md"
+        },
         "tags": [
           "Environments - Services"
         ],
@@ -2850,6 +3148,9 @@
       "post": {
         "summary": "Add a Service to the given environment",
         "operationId": "addEnvironmentService",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-service.md"
+        },
         "tags": [
           "Environments - Services"
         ],
@@ -2924,6 +3225,9 @@
       "get": {
         "summary": "Return a list of all SSH keys added to an environment",
         "operationId": "listEnvironmentSshKeys",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-ssh-keys.md"
+        },
         "tags": [
           "Environments - SSH Keys"
         ],
@@ -2989,6 +3293,9 @@
       "post": {
         "summary": "Create an SSH key and link it to the given environment",
         "operationId": "addEnvironmentSshKey",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-ssh-key.md"
+        },
         "tags": [
           "Environments - SSH Keys"
         ],
@@ -3063,6 +3370,9 @@
       "get": {
         "summary": "Return a list of all SSL Certificates belonging to an environment",
         "operationId": "listEnvironmentSslCertificates",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-ssl-certificates.md"
+        },
         "tags": [
           "Environments - SSL Certificates"
         ],
@@ -3118,6 +3428,9 @@
       "post": {
         "summary": "Create a new ssl certificate",
         "operationId": "addEnvironmentSslCertificate",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-ssl-certificate.md"
+        },
         "tags": [
           "Environments - SSL Certificates"
         ],
@@ -3192,6 +3505,9 @@
       "get": {
         "summary": "Return a list of teams with access to an environment",
         "operationId": "listEnvironmentTeamMemberships",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-team-memberships.md"
+        },
         "tags": [
           "Environments - Team Memberships"
         ],
@@ -3249,6 +3565,9 @@
       "post": {
         "summary": "Link team to a given environment",
         "operationId": "linkTeamToEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/link-team-to-environment.md"
+        },
         "tags": [
           "Environments - Teams"
         ],
@@ -3327,6 +3646,9 @@
       "delete": {
         "summary": "Unlink team from the environment",
         "operationId": "unlinkTeamFromEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/unlink-team-from-environment.md"
+        },
         "tags": [
           "Environments - Teams"
         ],
@@ -3394,6 +3716,9 @@
       "post": {
         "summary": "Unarchive an environment",
         "operationId": "unarchiveEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/unarchive-environment.md"
+        },
         "tags": [
           "Environments"
         ],
@@ -3440,6 +3765,9 @@
       "get": {
         "summary": "Return a list of all Virtual Hosts belonging to an environment",
         "operationId": "listEnvironmentVirtualHosts",
+        "description": {
+          "$ref": "../spec/descriptions/list-environment-virtual-hosts.md"
+        },
         "tags": [
           "Environments - Virtual Hosts"
         ],
@@ -3495,6 +3823,9 @@
       "post": {
         "summary": "Create a new virtual host",
         "operationId": "addEnvironmentVirtualHost",
+        "description": {
+          "$ref": "../spec/descriptions/add-environment-virtual-host.md"
+        },
         "tags": [
           "Environments - Virtual Hosts"
         ],
@@ -3569,6 +3900,9 @@
       "get": {
         "summary": "List events of a resource type",
         "operationId": "listResourceEventsByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-resource-events-by-resource-type.md"
+        },
         "tags": [
           "Resource Events"
         ],
@@ -3634,6 +3968,9 @@
       "post": {
         "summary": "Process event for a resource",
         "operationId": "addResourceEvent",
+        "description": {
+          "$ref": "../spec/descriptions/add-resource-event.md"
+        },
         "tags": [
           "Resource Events"
         ],
@@ -3706,6 +4043,9 @@
       "get": {
         "summary": "Get a hook request by ID",
         "operationId": "getHookRequest",
+        "description": {
+          "$ref": "../spec/descriptions/get-hook-request.md"
+        },
         "tags": [
           "Hook Requests"
         ],
@@ -3761,6 +4101,9 @@
       "post": {
         "summary": "Trigger an incoming hook associated action",
         "operationId": "triggerHook",
+        "description": {
+          "$ref": "../spec/descriptions/trigger-hook.md"
+        },
         "tags": [
           "Hooks"
         ],
@@ -3831,6 +4174,9 @@
       "delete": {
         "summary": "Delete a given hook",
         "operationId": "deleteHook",
+        "description": {
+          "$ref": "../spec/descriptions/delete-hook.md"
+        },
         "tags": [
           "Hooks"
         ],
@@ -3884,6 +4230,9 @@
       "get": {
         "summary": "Get a hook by ID",
         "operationId": "getHook",
+        "description": {
+          "$ref": "../spec/descriptions/get-hook.md"
+        },
         "tags": [
           "Hooks"
         ],
@@ -3944,6 +4293,9 @@
       "put": {
         "summary": "Update an existing hook",
         "operationId": "updateHook",
+        "description": {
+          "$ref": "../spec/descriptions/update-hook.md"
+        },
         "tags": [
           "Hooks"
         ],
@@ -4020,6 +4372,9 @@
       "get": {
         "summary": "Returns a list of all hook requests belonging to a hook",
         "operationId": "listHookRequestsByHookType",
+        "description": {
+          "$ref": "../spec/descriptions/list-hook-requests-by-hook-type.md"
+        },
         "tags": [
           "Hooks - Requests"
         ],
@@ -4086,6 +4441,9 @@
       "delete": {
         "summary": "Delete a given Network Rule",
         "operationId": "deleteNetworkRule",
+        "description": {
+          "$ref": "../spec/descriptions/delete-network-rule.md"
+        },
         "tags": [
           "Network Rules"
         ],
@@ -4138,6 +4496,9 @@
       "get": {
         "summary": "Get a Network Rule by ID",
         "operationId": "getNetworkRule",
+        "description": {
+          "$ref": "../spec/descriptions/get-network-rule.md"
+        },
         "tags": [
           "Network Rules"
         ],
@@ -4189,6 +4550,9 @@
       "put": {
         "summary": "Update an existing Network Rule",
         "operationId": "updateNetworkRule",
+        "description": {
+          "$ref": "../spec/descriptions/update-network-rule.md"
+        },
         "tags": [
           "Network Rules"
         ],
@@ -4256,6 +4620,9 @@
       "delete": {
         "summary": "Delete a given network",
         "operationId": "deleteNetwork",
+        "description": {
+          "$ref": "../spec/descriptions/delete-network.md"
+        },
         "tags": [
           "Networks"
         ],
@@ -4308,6 +4675,9 @@
       "get": {
         "summary": "Get a network by ID",
         "operationId": "getNetwork",
+        "description": {
+          "$ref": "../spec/descriptions/get-network.md"
+        },
         "tags": [
           "Networks"
         ],
@@ -4355,12 +4725,83 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "Update an existing Network",
+        "operationId": "updateNetwork",
+        "description": {
+          "$ref": "../spec/descriptions/update-network.md"
+        },
+        "tags": [
+          "Networks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "in": "path",
+            "name": "network_id",
+            "description": "The ID of the network.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden/Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity/Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "A JSON object containing the resource data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkUpdate"
+              }
+            }
+          }
+        }
       }
     },
     "/networks/{network_id}/subnets": {
       "get": {
         "summary": "Return a list of all subnets belonging to a network",
         "operationId": "listNetworkSubnets",
+        "description": {
+          "$ref": "../spec/descriptions/list-network-subnets.md"
+        },
         "tags": [
           "Networks - Subnets"
         ],
@@ -4436,6 +4877,9 @@
       "post": {
         "summary": "Create a new subnet for the given network",
         "operationId": "addNetworkSubnet",
+        "description": {
+          "$ref": "../spec/descriptions/add-network-subnet.md"
+        },
         "tags": [
           "Networks - Subnets"
         ],
@@ -4518,6 +4962,9 @@
       "delete": {
         "summary": "Delete a given Pipeline",
         "operationId": "deletePipeline",
+        "description": {
+          "$ref": "../spec/descriptions/delete-pipeline.md"
+        },
         "tags": [
           "Pipelines"
         ],
@@ -4562,6 +5009,9 @@
       "get": {
         "summary": "Get a Pipeline by ID",
         "operationId": "getPipeline",
+        "description": {
+          "$ref": "../spec/descriptions/get-pipeline.md"
+        },
         "tags": [
           "Pipelines"
         ],
@@ -4613,6 +5063,9 @@
       "put": {
         "summary": "Update an existing Pipeline",
         "operationId": "updatePipeline",
+        "description": {
+          "$ref": "../spec/descriptions/update-pipeline.md"
+        },
         "tags": [
           "Pipelines"
         ],
@@ -4680,6 +5133,9 @@
       "get": {
         "summary": "Return a list of pipeline's actions",
         "operationId": "listPipelineActions",
+        "description": {
+          "$ref": "../spec/descriptions/list-pipeline-actions.md"
+        },
         "tags": [
           "Pipelines - Actions"
         ],
@@ -4735,6 +5191,9 @@
       "post": {
         "summary": "Create an action to run a Pipeline",
         "operationId": "addPipelineAction",
+        "description": {
+          "$ref": "../spec/descriptions/add-pipeline-action.md"
+        },
         "tags": [
           "Pipelines - Actions"
         ],
@@ -4809,6 +5268,9 @@
       "get": {
         "summary": "List all hooks in a pipeline",
         "operationId": "listPipelineHooks",
+        "description": {
+          "$ref": "../spec/descriptions/list-pipeline-hooks.md"
+        },
         "tags": [
           "Pipelines - Hooks"
         ],
@@ -4876,6 +5338,9 @@
       "post": {
         "summary": "Create a hook to a specific pipeline",
         "operationId": "addPipelineHook",
+        "description": {
+          "$ref": "../spec/descriptions/add-pipeline-hook.md"
+        },
         "tags": [
           "Pipelines - Hooks"
         ],
@@ -4960,6 +5425,9 @@
       "post": {
         "summary": "Add a step to a pipeline",
         "operationId": "addPipelineStep",
+        "description": {
+          "$ref": "../spec/descriptions/add-pipeline-step.md"
+        },
         "tags": [
           "Pipelines - Steps"
         ],
@@ -5034,6 +5502,9 @@
       "put": {
         "summary": "Update an existing Pipeline Step",
         "operationId": "updatePipelineStep",
+        "description": {
+          "$ref": "../spec/descriptions/update-pipeline-step.md"
+        },
         "tags": [
           "Pipelines - Steps"
         ],
@@ -5112,6 +5583,9 @@
       "post": {
         "summary": "Link a step to a Pipeline",
         "operationId": "linkStepToPipeline",
+        "description": {
+          "$ref": "../spec/descriptions/link-step-to-pipeline.md"
+        },
         "tags": [
           "Pipelines - Steps"
         ],
@@ -5169,6 +5643,9 @@
       "delete": {
         "summary": "Unlink a step from a Pipeline",
         "operationId": "unlinkStepFromPipeline",
+        "description": {
+          "$ref": "../spec/descriptions/unlink-step-from-pipeline.md"
+        },
         "tags": [
           "Pipelines - Steps"
         ],
@@ -5226,6 +5703,9 @@
       "get": {
         "summary": "Return a list of pipelines to a resource",
         "operationId": "listPipelinesByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-pipelines-by-resource-type.md"
+        },
         "tags": [
           "Pipelines"
         ],
@@ -5291,6 +5771,9 @@
       "post": {
         "summary": "Add a Pipeline to a resource",
         "operationId": "addPipeline",
+        "description": {
+          "$ref": "../spec/descriptions/add-pipeline.md"
+        },
         "tags": [
           "Pipelines"
         ],
@@ -5375,6 +5858,9 @@
       "get": {
         "summary": "Return a list of all projects the current user has access to",
         "operationId": "listProjects",
+        "description": {
+          "$ref": "../spec/descriptions/list-projects.md"
+        },
         "tags": [
           "Projects"
         ],
@@ -5419,6 +5905,9 @@
       "post": {
         "summary": "Create a project",
         "operationId": "addProject",
+        "description": {
+          "$ref": "../spec/descriptions/add-project.md"
+        },
         "tags": [
           "Projects"
         ],
@@ -5482,6 +5971,9 @@
       "get": {
         "summary": "Get a Project by ID",
         "operationId": "getProject",
+        "description": {
+          "$ref": "../spec/descriptions/get-project.md"
+        },
         "tags": [
           "Projects"
         ],
@@ -5533,6 +6025,9 @@
       "put": {
         "summary": "Update an existing Project",
         "operationId": "updateProject",
+        "description": {
+          "$ref": "../spec/descriptions/update-project.md"
+        },
         "tags": [
           "Projects"
         ],
@@ -5600,6 +6095,9 @@
       "get": {
         "summary": "List project actions of a resource type",
         "operationId": "listProjectActionsByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-project-actions-by-resource-type.md"
+        },
         "tags": [
           "Projects - Actions"
         ],
@@ -5667,6 +6165,9 @@
       "get": {
         "summary": "Return a list of all environments belonging to a project",
         "operationId": "listProjectEnvironments",
+        "description": {
+          "$ref": "../spec/descriptions/list-project-environments.md"
+        },
         "tags": [
           "Projects - Environments"
         ],
@@ -5732,6 +6233,9 @@
       "post": {
         "summary": "Create a new environment on the current project",
         "operationId": "addProjectEnvironment",
+        "description": {
+          "$ref": "../spec/descriptions/add-project-environment.md"
+        },
         "tags": [
           "Projects - Environments"
         ],
@@ -5796,6 +6300,9 @@
       "get": {
         "summary": "Return a list of all archived environments belonging to a project",
         "operationId": "listProjectArchivedEnvironments",
+        "description": {
+          "$ref": "../spec/descriptions/list-project-archived-environments.md"
+        },
         "tags": [
           "Projects - Archived Environments"
         ],
@@ -5863,6 +6370,9 @@
       "get": {
         "summary": "List all roles from a project",
         "operationId": "listProjectRoles",
+        "description": {
+          "$ref": "../spec/descriptions/list-project-roles.md"
+        },
         "tags": [
           "Projects - Roles"
         ],
@@ -5918,6 +6428,9 @@
       "post": {
         "summary": "Create a role to a given project",
         "operationId": "addProjectRole",
+        "description": {
+          "$ref": "../spec/descriptions/add-project-role.md"
+        },
         "tags": [
           "Projects - Roles"
         ],
@@ -5992,6 +6505,9 @@
       "get": {
         "summary": "Return a list of all teams belonging to a project",
         "operationId": "listProjectTeams",
+        "description": {
+          "$ref": "../spec/descriptions/list-project-teams.md"
+        },
         "tags": [
           "Projects - Teams"
         ],
@@ -6047,6 +6563,9 @@
       "post": {
         "summary": "Create a team to the given project",
         "operationId": "addProjectTeam",
+        "description": {
+          "$ref": "../spec/descriptions/add-project-team.md"
+        },
         "tags": [
           "Projects - Teams"
         ],
@@ -6121,6 +6640,9 @@
       "get": {
         "summary": "List linked resources of the given resource",
         "operationId": "listResourceLinksByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-resource-links-by-resource-type.md"
+        },
         "tags": [
           "Resource Links"
         ],
@@ -6188,6 +6710,9 @@
       "post": {
         "summary": "Link the given resources",
         "operationId": "linkResourceLinkToResourceLink",
+        "description": {
+          "$ref": "../spec/descriptions/link-resource-link-to-resource-link.md"
+        },
         "tags": [
           "Resource Links"
         ],
@@ -6275,6 +6800,9 @@
       "delete": {
         "summary": "Delete a given resource link",
         "operationId": "unlinkResourceLinkFromResourceLink",
+        "description": {
+          "$ref": "../spec/descriptions/unlink-resource-link-from-resource-link.md"
+        },
         "tags": [
           "Resource Links"
         ],
@@ -6352,6 +6880,9 @@
       "get": {
         "summary": "List linked resources of specified link type",
         "operationId": "listResourceLinksByResourceTypeAndLinkType",
+        "description": {
+          "$ref": "../spec/descriptions/list-resource-links-by-resource-type-and-link-type.md"
+        },
         "tags": [
           "Resource Links"
         ],
@@ -6429,6 +6960,9 @@
       "delete": {
         "summary": "Delete a given role",
         "operationId": "deleteRole",
+        "description": {
+          "$ref": "../spec/descriptions/delete-role.md"
+        },
         "tags": [
           "Roles"
         ],
@@ -6466,6 +7000,9 @@
       "get": {
         "summary": "Get a role by ID",
         "operationId": "getRole",
+        "description": {
+          "$ref": "../spec/descriptions/get-role.md"
+        },
         "tags": [
           "Roles"
         ],
@@ -6510,6 +7047,9 @@
       "put": {
         "summary": "Update an existing role",
         "operationId": "updateRole",
+        "description": {
+          "$ref": "../spec/descriptions/update-role.md"
+        },
         "tags": [
           "Roles"
         ],
@@ -6567,6 +7107,9 @@
       "delete": {
         "summary": "Delete a given server",
         "operationId": "deleteServer",
+        "description": {
+          "$ref": "../spec/descriptions/delete-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6629,6 +7172,9 @@
       "get": {
         "summary": "Get a server by ID",
         "operationId": "getServer",
+        "description": {
+          "$ref": "../spec/descriptions/get-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6680,6 +7226,9 @@
       "put": {
         "summary": "Update an existing server",
         "operationId": "updateServer",
+        "description": {
+          "$ref": "../spec/descriptions/update-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6747,6 +7296,9 @@
       "get": {
         "summary": "Get commands to be executed on the given server",
         "operationId": "getServerCommands",
+        "description": {
+          "$ref": "../spec/descriptions/get-server-commands.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6800,6 +7352,9 @@
       "post": {
         "summary": "Connect a server to devopness platform",
         "operationId": "connectServer",
+        "description": {
+          "$ref": "../spec/descriptions/connect-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6869,6 +7424,9 @@
       "post": {
         "summary": "Get current status of the server on the cloud provider",
         "operationId": "getStatusServer",
+        "description": {
+          "$ref": "../spec/descriptions/get-status-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6923,6 +7481,9 @@
       "post": {
         "summary": "Restart a current running server",
         "operationId": "restartServer",
+        "description": {
+          "$ref": "../spec/descriptions/restart-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -6977,6 +7538,9 @@
       "post": {
         "summary": "Start a previously stopped server",
         "operationId": "startServer",
+        "description": {
+          "$ref": "../spec/descriptions/start-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -7031,6 +7595,9 @@
       "post": {
         "summary": "Stop a running server",
         "operationId": "stopServer",
+        "description": {
+          "$ref": "../spec/descriptions/stop-server.md"
+        },
         "tags": [
           "Servers"
         ],
@@ -7085,6 +7652,9 @@
       "delete": {
         "summary": "Delete a given service",
         "operationId": "deleteService",
+        "description": {
+          "$ref": "../spec/descriptions/delete-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7137,6 +7707,9 @@
       "get": {
         "summary": "Get details of a single service",
         "operationId": "getService",
+        "description": {
+          "$ref": "../spec/descriptions/get-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7188,6 +7761,9 @@
       "put": {
         "summary": "Update an existing service",
         "operationId": "updateService",
+        "description": {
+          "$ref": "../spec/descriptions/update-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7255,6 +7831,9 @@
       "post": {
         "summary": "Get current status of a service",
         "operationId": "getStatusService",
+        "description": {
+          "$ref": "../spec/descriptions/get-status-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7323,6 +7902,9 @@
       "post": {
         "summary": "Reload a service",
         "operationId": "reloadService",
+        "description": {
+          "$ref": "../spec/descriptions/reload-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7390,6 +7972,9 @@
       "post": {
         "summary": "Restart a service",
         "operationId": "restartService",
+        "description": {
+          "$ref": "../spec/descriptions/restart-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7457,6 +8042,9 @@
       "post": {
         "summary": "Start a service",
         "operationId": "startService",
+        "description": {
+          "$ref": "../spec/descriptions/start-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7524,6 +8112,9 @@
       "post": {
         "summary": "Stop a service",
         "operationId": "stopService",
+        "description": {
+          "$ref": "../spec/descriptions/stop-service.md"
+        },
         "tags": [
           "Services"
         ],
@@ -7591,6 +8182,9 @@
       "get": {
         "summary": "Return a list of variables belonging to a service",
         "operationId": "listServiceVariables",
+        "description": {
+          "$ref": "../spec/descriptions/list-service-variables.md"
+        },
         "tags": [
           "Services - Variables"
         ],
@@ -7647,6 +8241,9 @@
       "post": {
         "summary": "Create a new variable linked to a service",
         "operationId": "addServiceVariable",
+        "description": {
+          "$ref": "../spec/descriptions/add-service-variable.md"
+        },
         "tags": [
           "Services - Variables"
         ],
@@ -7722,6 +8319,9 @@
       "get": {
         "summary": "Return a list of all social accounts of the current user",
         "operationId": "listSocialAccounts",
+        "description": {
+          "$ref": "../spec/descriptions/list-social-accounts.md"
+        },
         "tags": [
           "Social Accounts"
         ],
@@ -7766,6 +8366,9 @@
       "post": {
         "summary": "Add a social account",
         "operationId": "addSocialAccount",
+        "description": {
+          "$ref": "../spec/descriptions/add-social-account.md"
+        },
         "tags": [
           "Social Accounts"
         ],
@@ -7819,6 +8422,9 @@
       "delete": {
         "summary": "Delete a given social account",
         "operationId": "deleteSocialAccount",
+        "description": {
+          "$ref": "../spec/descriptions/delete-social-account.md"
+        },
         "tags": [
           "Social Accounts"
         ],
@@ -7858,6 +8464,9 @@
       "get": {
         "summary": "Get a social account by provider name",
         "operationId": "getSocialAccount",
+        "description": {
+          "$ref": "../spec/descriptions/get-social-account.md"
+        },
         "tags": [
           "Social Accounts"
         ],
@@ -7903,6 +8512,9 @@
       "get": {
         "summary": "Get status of a social account",
         "operationId": "getSocialAccountStatus",
+        "description": {
+          "$ref": "../spec/descriptions/get-social-account-status.md"
+        },
         "tags": [
           "Social Accounts"
         ],
@@ -7944,322 +8556,13 @@
         }
       }
     },
-    "/source-providers": {
-      "get": {
-        "summary": "Return a list of all source code providers linked to current user",
-        "operationId": "listSourceProviders",
-        "tags": [
-          "Source Providers"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "$ref": "#/components/parameters/pageNumber"
-          },
-          {
-            "$ref": "#/components/parameters/pageSize"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SourceProviderList"
-                }
-              }
-            },
-            "headers": {
-              "Link": {
-                "schema": {
-                  "type": "string"
-                },
-                "description": "Link header with `first`, `last`, `previous` and `next` page's links"
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Add a new source provider to the current user's profile",
-        "operationId": "addSourceProvider",
-        "tags": [
-          "Source Providers"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SourceProvider"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden/Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity/Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "description": "A JSON object containing the resource data",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SourceProviderCreate"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/source-providers/{source_provider_id}": {
-      "delete": {
-        "summary": "Delete a given source provider from current user's account",
-        "operationId": "deleteSourceProvider",
-        "tags": [
-          "Source Providers"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "in": "path",
-            "name": "source_provider_id",
-            "description": "The ID of the source provider.",
-            "example": 123,
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "403": {
-            "description": "Forbidden/Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "summary": "Get a source provider by ID",
-        "operationId": "getSourceProvider",
-        "tags": [
-          "Source Providers"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "in": "path",
-            "name": "source_provider_id",
-            "description": "The ID of the source provider.",
-            "example": 123,
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SourceProvider"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The specified resource was not found"
-          }
-        }
-      }
-    },
-    "/source-providers/{source_provider_id}/repositories": {
-      "get": {
-        "summary": "Return a list of all repositories belonging to the current user social provider account",
-        "operationId": "listSourceProviderRepositories",
-        "tags": [
-          "Source Providers - Repositories"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "$ref": "#/components/parameters/pageNumber"
-          },
-          {
-            "$ref": "#/components/parameters/pageSize"
-          },
-          {
-            "in": "path",
-            "name": "source_provider_id",
-            "description": "The ID of the source provider.",
-            "example": 123,
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RepositoryList"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/source-providers/{source_provider_id}/repositories/{repository_owner}/{repository_name}": {
-      "get": {
-        "summary": "Get details of a repository by its name",
-        "operationId": "getSourceProviderRepository",
-        "tags": [
-          "Source Providers - Repositories"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "in": "path",
-            "name": "repository_name",
-            "description": "The repository name",
-            "example": "repo_name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "repository_owner",
-            "description": "The owner of the repository",
-            "example": "repo_owner",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "source_provider_id",
-            "description": "The ID of the source provider.",
-            "example": 123,
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Repository"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The specified resource was not found"
-          }
-        }
-      }
-    },
     "/ssh-keys/{ssh_key_id}": {
       "delete": {
         "summary": "Delete a given SSH key",
         "operationId": "deleteSshKey",
+        "description": {
+          "$ref": "../spec/descriptions/delete-ssh-key.md"
+        },
         "tags": [
           "SSH Keys"
         ],
@@ -8312,6 +8615,9 @@
       "get": {
         "summary": "Get a SSH key by ID",
         "operationId": "getSshKey",
+        "description": {
+          "$ref": "../spec/descriptions/get-ssh-key.md"
+        },
         "tags": [
           "SSH Keys"
         ],
@@ -8363,6 +8669,9 @@
       "put": {
         "summary": "Update an existing SSH key",
         "operationId": "updateSshKey",
+        "description": {
+          "$ref": "../spec/descriptions/update-ssh-key.md"
+        },
         "tags": [
           "SSH Keys"
         ],
@@ -8430,6 +8739,9 @@
       "delete": {
         "summary": "Delete a given SSL Certificate",
         "operationId": "deleteSslCertificate",
+        "description": {
+          "$ref": "../spec/descriptions/delete-ssl-certificate.md"
+        },
         "tags": [
           "SSL Certificates"
         ],
@@ -8482,6 +8794,9 @@
       "get": {
         "summary": "Get details of a single SSL certificate",
         "operationId": "getSslCertificate",
+        "description": {
+          "$ref": "../spec/descriptions/get-ssl-certificate.md"
+        },
         "tags": [
           "SSL Certificates"
         ],
@@ -8535,6 +8850,9 @@
       "get": {
         "summary": "List `Application` resource options",
         "operationId": "getStaticApplicationOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-application-options.md"
+        },
         "tags": [
           "Static Data - Application Options"
         ],
@@ -8563,48 +8881,13 @@
         }
       }
     },
-    "/static/cloud-provider-options": {
-      "get": {
-        "summary": "List `Cloud Provider` service options",
-        "operationId": "listStaticCloudProviderOptions",
-        "tags": [
-          "Static Data - Cloud Provider Options"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "$ref": "#/components/parameters/pageNumber"
-          },
-          {
-            "$ref": "#/components/parameters/pageSize"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CloudProviderOptionsList"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/static/cloud-provider-service-options/{cloud_provider_service_code}": {
       "get": {
         "summary": "Get details of a single `Cloud Provider Service`",
         "operationId": "getStaticCloudProviderService",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-cloud-provider-service.md"
+        },
         "tags": [
           "Static Data - Cloud Provider Services"
         ],
@@ -8650,6 +8933,9 @@
       "get": {
         "summary": "List `Cloud Provider Service` instance types by region",
         "operationId": "listStaticCloudInstancesByCloudProviderServiceCodeAndRegionCode",
+        "description": {
+          "$ref": "../spec/descriptions/list-static-cloud-instances-by-cloud-provider-service-code-and-region-code.md"
+        },
         "tags": [
           "Static Data - Cloud Provider Service Instances"
         ],
@@ -8704,10 +8990,48 @@
         }
       }
     },
+    "/static/credential-options": {
+      "get": {
+        "summary": "List `Credential` resource options",
+        "operationId": "getStaticCredentialOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-credential-options.md"
+        },
+        "tags": [
+          "Static Data - Credential Options"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CredentialOptions"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/static/cronjob-options": {
       "get": {
         "summary": "List `CronJob` resource options",
         "operationId": "getStaticCronJobOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-cron-job-options.md"
+        },
         "tags": [
           "Static Data - Cron Job Options"
         ],
@@ -8740,6 +9064,9 @@
       "get": {
         "summary": "List `Environment` options",
         "operationId": "getStaticEnvironmentOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-environment-options.md"
+        },
         "tags": [
           "Static Data - Environment Options"
         ],
@@ -8772,6 +9099,9 @@
       "get": {
         "summary": "List `Network Rule` options",
         "operationId": "getStaticNetworkRuleOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-network-rule-options.md"
+        },
         "tags": [
           "Static Data - Network Rule Options"
         ],
@@ -8804,6 +9134,9 @@
       "get": {
         "summary": "List available `Role` permissions",
         "operationId": "listStaticPermissions",
+        "description": {
+          "$ref": "../spec/descriptions/list-static-permissions.md"
+        },
         "tags": [
           "Static Data - Permissions"
         ],
@@ -8842,6 +9175,9 @@
       "get": {
         "summary": "List available resource types",
         "operationId": "listStaticResourceTypes",
+        "description": {
+          "$ref": "../spec/descriptions/list-static-resource-types.md"
+        },
         "tags": [
           "Static Data - Resource Types"
         ],
@@ -8880,6 +9216,9 @@
       "get": {
         "summary": "List `Server` options",
         "operationId": "getStaticServerOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-server-options.md"
+        },
         "tags": [
           "Static Data - Server Options"
         ],
@@ -8912,6 +9251,9 @@
       "get": {
         "summary": "List `Service` resource options",
         "operationId": "getStaticServiceOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-service-options.md"
+        },
         "tags": [
           "Static Data - Service Options"
         ],
@@ -8940,48 +9282,13 @@
         }
       }
     },
-    "/static/source-provider-options": {
-      "get": {
-        "summary": "List `Source provider` options",
-        "operationId": "listStaticSourceProviderOptions",
-        "tags": [
-          "Static Data - Source Provider Options"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/acceptHeader"
-          },
-          {
-            "$ref": "#/components/parameters/authHeader"
-          },
-          {
-            "$ref": "#/components/parameters/contentTypeHeader"
-          },
-          {
-            "$ref": "#/components/parameters/pageNumber"
-          },
-          {
-            "$ref": "#/components/parameters/pageSize"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SourceProviderOptionsList"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/static/user-profile-options": {
       "get": {
         "summary": "List `User profile` options",
         "operationId": "getStaticUserProfileOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-user-profile-options.md"
+        },
         "tags": [
           "Static Data - User Profile Options"
         ],
@@ -9014,6 +9321,9 @@
       "get": {
         "summary": "List `Virtual Host` options",
         "operationId": "getStaticVirtualHostOptions",
+        "description": {
+          "$ref": "../spec/descriptions/get-static-virtual-host-options.md"
+        },
         "tags": [
           "Static Data - Virtual Host Options"
         ],
@@ -9046,6 +9356,9 @@
       "delete": {
         "summary": "Delete a given subnet",
         "operationId": "deleteSubnet",
+        "description": {
+          "$ref": "../spec/descriptions/delete-subnet.md"
+        },
         "tags": [
           "Subnets"
         ],
@@ -9098,6 +9411,9 @@
       "get": {
         "summary": "Get a subnet by ID",
         "operationId": "getSubnet",
+        "description": {
+          "$ref": "../spec/descriptions/get-subnet.md"
+        },
         "tags": [
           "Subnets"
         ],
@@ -9151,6 +9467,9 @@
       "post": {
         "summary": "Accept a pending team invitation",
         "operationId": "acceptTeamInvitation",
+        "description": {
+          "$ref": "../spec/descriptions/accept-team-invitation.md"
+        },
         "tags": [
           "Team Invitations"
         ],
@@ -9196,6 +9515,9 @@
       "delete": {
         "summary": "Delete a given team",
         "operationId": "deleteTeam",
+        "description": {
+          "$ref": "../spec/descriptions/delete-team.md"
+        },
         "tags": [
           "Teams"
         ],
@@ -9240,6 +9562,9 @@
       "get": {
         "summary": "Get a team by ID",
         "operationId": "getTeam",
+        "description": {
+          "$ref": "../spec/descriptions/get-team.md"
+        },
         "tags": [
           "Teams"
         ],
@@ -9284,6 +9609,9 @@
       "put": {
         "summary": "Update an existing team",
         "operationId": "updateTeam",
+        "description": {
+          "$ref": "../spec/descriptions/update-team.md"
+        },
         "tags": [
           "Teams"
         ],
@@ -9351,6 +9679,9 @@
       "get": {
         "summary": "Return a list of pending invitations belonging to a team",
         "operationId": "listTeamInvitations",
+        "description": {
+          "$ref": "../spec/descriptions/list-team-invitations.md"
+        },
         "tags": [
           "Teams - Invitations"
         ],
@@ -9406,6 +9737,9 @@
       "post": {
         "summary": "Send invitation to user email to participate to a team",
         "operationId": "addTeamInvitation",
+        "description": {
+          "$ref": "../spec/descriptions/add-team-invitation.md"
+        },
         "tags": [
           "Teams - Invitations"
         ],
@@ -9480,6 +9814,9 @@
       "get": {
         "summary": "Return a list of all members belonging to a team",
         "operationId": "listTeamMembers",
+        "description": {
+          "$ref": "../spec/descriptions/list-team-members.md"
+        },
         "tags": [
           "Teams - Members"
         ],
@@ -9537,6 +9874,9 @@
       "delete": {
         "summary": "Delete a given team member",
         "operationId": "deleteTeamMember",
+        "description": {
+          "$ref": "../spec/descriptions/delete-team-member.md"
+        },
         "tags": [
           "Teams - Members"
         ],
@@ -9585,6 +9925,9 @@
       "get": {
         "summary": "Get a member of team by ID",
         "operationId": "getTeamMember",
+        "description": {
+          "$ref": "../spec/descriptions/get-team-member.md"
+        },
         "tags": [
           "Teams - Members"
         ],
@@ -9642,6 +9985,9 @@
       "post": {
         "summary": "Sign up/register a new user",
         "operationId": "addUser",
+        "description": {
+          "$ref": "../spec/descriptions/add-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9685,6 +10031,9 @@
       "post": {
         "summary": "Resend the verification email",
         "operationId": "resendVerificationUser",
+        "description": {
+          "$ref": "../spec/descriptions/resend-verification-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9731,6 +10080,9 @@
       "post": {
         "summary": "Activate the user account",
         "operationId": "verifyUser",
+        "description": {
+          "$ref": "../spec/descriptions/verify-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9784,6 +10136,9 @@
       "get": {
         "summary": "Get current user's billing info for active subscription",
         "operationId": "getUserBilling",
+        "description": {
+          "$ref": "../spec/descriptions/get-user-billing.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9816,6 +10171,9 @@
       "post": {
         "summary": "Login/create a new token for the given credentials",
         "operationId": "loginUser",
+        "description": {
+          "$ref": "../spec/descriptions/login-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9886,6 +10244,9 @@
       "get": {
         "summary": "Logout/revoke an existing token",
         "operationId": "getUserLogout",
+        "description": {
+          "$ref": "../spec/descriptions/get-user-logout.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9921,6 +10282,9 @@
       "get": {
         "summary": "Get details of the current user",
         "operationId": "getUserMe",
+        "description": {
+          "$ref": "../spec/descriptions/get-user-me.md"
+        },
         "tags": [
           "Users"
         ],
@@ -9953,6 +10317,9 @@
       "post": {
         "summary": "Reset the user password",
         "operationId": "resetUserPassword",
+        "description": {
+          "$ref": "../spec/descriptions/reset-user-password.md"
+        },
         "tags": [
           "Users - Passwords"
         ],
@@ -10003,6 +10370,9 @@
       "post": {
         "summary": "Send the password reset link to user's email",
         "operationId": "sendResetLinkUserPassword",
+        "description": {
+          "$ref": "../spec/descriptions/send-reset-link-user-password.md"
+        },
         "tags": [
           "Users - Passwords"
         ],
@@ -10046,6 +10416,9 @@
       "post": {
         "summary": "Refresh an existing user access token",
         "operationId": "refreshTokenUser",
+        "description": {
+          "$ref": "../spec/descriptions/refresh-token-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -10106,6 +10479,9 @@
       "get": {
         "summary": "Return a list of all pending team invitations for the authenticated user",
         "operationId": "listUserTeamInvitations",
+        "description": {
+          "$ref": "../spec/descriptions/list-user-team-invitations.md"
+        },
         "tags": [
           "Users - Team Invitations"
         ],
@@ -10152,6 +10528,9 @@
       "get": {
         "summary": "Get the authenticated user's URLs",
         "operationId": "getUserUrls",
+        "description": {
+          "$ref": "../spec/descriptions/get-user-urls.md"
+        },
         "tags": [
           "Users"
         ],
@@ -10184,6 +10563,9 @@
       "get": {
         "summary": "Get a user by ID",
         "operationId": "getUser",
+        "description": {
+          "$ref": "../spec/descriptions/get-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -10235,6 +10617,9 @@
       "put": {
         "summary": "Update an existing user",
         "operationId": "updateUser",
+        "description": {
+          "$ref": "../spec/descriptions/update-user.md"
+        },
         "tags": [
           "Users"
         ],
@@ -10302,6 +10687,9 @@
       "get": {
         "summary": "Get current user's activity info",
         "operationId": "getUserActivity",
+        "description": {
+          "$ref": "../spec/descriptions/get-user-activity.md"
+        },
         "tags": [
           "Users"
         ],
@@ -10355,6 +10743,9 @@
       "get": {
         "summary": "Return a list of all environments owned by the current user",
         "operationId": "listUserEnvironments",
+        "description": {
+          "$ref": "../spec/descriptions/list-user-environments.md"
+        },
         "tags": [
           "Users - Environments"
         ],
@@ -10424,6 +10815,9 @@
       "get": {
         "summary": "Return a list of all projects owned by the current user",
         "operationId": "listUserProjects",
+        "description": {
+          "$ref": "../spec/descriptions/list-user-projects.md"
+        },
         "tags": [
           "Users - Projects"
         ],
@@ -10493,6 +10887,9 @@
       "get": {
         "summary": "Return a list of variables belonging to a resource",
         "operationId": "listVariablesByResourceType",
+        "description": {
+          "$ref": "../spec/descriptions/list-variables-by-resource-type.md"
+        },
         "tags": [
           "Variables"
         ],
@@ -10558,6 +10955,9 @@
       "post": {
         "summary": "Create a new variable linked to a resource",
         "operationId": "addVariable",
+        "description": {
+          "$ref": "../spec/descriptions/add-variable.md"
+        },
         "tags": [
           "Variables"
         ],
@@ -10642,6 +11042,9 @@
       "delete": {
         "summary": "Delete a variable by ID",
         "operationId": "deleteVariable",
+        "description": {
+          "$ref": "../spec/descriptions/delete-variable.md"
+        },
         "tags": [
           "Variables"
         ],
@@ -10686,6 +11089,9 @@
       "get": {
         "summary": "Get a variable by ID",
         "operationId": "getVariable",
+        "description": {
+          "$ref": "../spec/descriptions/get-variable.md"
+        },
         "tags": [
           "Variables"
         ],
@@ -10737,6 +11143,9 @@
       "put": {
         "summary": "Update an existing variable",
         "operationId": "updateVariable",
+        "description": {
+          "$ref": "../spec/descriptions/update-variable.md"
+        },
         "tags": [
           "Variables"
         ],
@@ -10804,6 +11213,9 @@
       "delete": {
         "summary": "Delete a given virtual host",
         "operationId": "deleteVirtualHost",
+        "description": {
+          "$ref": "../spec/descriptions/delete-virtual-host.md"
+        },
         "tags": [
           "Virtual Hosts"
         ],
@@ -10859,6 +11271,9 @@
       "get": {
         "summary": "Get a virtual host by ID",
         "operationId": "getVirtualHost",
+        "description": {
+          "$ref": "../spec/descriptions/get-virtual-host.md"
+        },
         "tags": [
           "Virtual Hosts"
         ],
@@ -10913,6 +11328,9 @@
       "put": {
         "summary": "Update an existing virtual host",
         "operationId": "updateVirtualHost",
+        "description": {
+          "$ref": "../spec/descriptions/update-virtual-host.md"
+        },
         "tags": [
           "Virtual Hosts"
         ],
@@ -10983,6 +11401,9 @@
       "post": {
         "summary": "Get current status of a virtual host",
         "operationId": "getStatusVirtualHost",
+        "description": {
+          "$ref": "../spec/descriptions/get-status-virtual-host.md"
+        },
         "tags": [
           "Virtual Hosts"
         ],
@@ -11068,13 +11489,13 @@
       "name": "Static Data - Application Options"
     },
     {
-      "name": "Static Data - Cloud Provider Options"
-    },
-    {
       "name": "Static Data - Cloud Provider Service Instances"
     },
     {
       "name": "Static Data - Cloud Provider Services"
+    },
+    {
+      "name": "Static Data - Credential Options"
     },
     {
       "name": "Static Data - Cron Job Options"
@@ -11118,9 +11539,6 @@
     {
       "name": "Applications - Variables",
       "description": "Throughout the `devopness` documentation the term `SSL Certificate` refers to a public key certificate adhering to `X.509` standard. While TLS is the protocol more used nowadays for web encryption, for historical reasons web encryption is often referred to simply as SSL. A SSL Certificate managed by `devopness` might be used as an HTTPS/SSL/TLS and other internet protocols to establish encrypted connections between client apps (e.g. browsers) and the web application servers managed through `devopness`, but it's not limited to be used for authenticating server's identity.\n"
-    },
-    {
-      "name": "Cloud Providers - Credentials"
     },
     {
       "name": "Cron Jobs",
@@ -11316,9 +11734,9 @@
       "name": "Static Data",
       "tags": [
         "Static Data - Application Options",
-        "Static Data - Cloud Provider Options",
         "Static Data - Cloud Provider Service Instances",
         "Static Data - Cloud Provider Services",
+        "Static Data - Credential Options",
         "Static Data - Cron Job Options",
         "Static Data - Environment Options",
         "Static Data - Network Rule Options",
@@ -11350,15 +11768,10 @@
       ]
     },
     {
-      "name": "Cloud Providers",
-      "tags": [
-        "Cloud Providers - Credentials"
-      ]
-    },
-    {
       "name": "Credentials",
       "tags": [
-        "Credentials"
+        "Credentials",
+        "Environments - Credentials"
       ]
     },
     {
@@ -12656,7 +13069,7 @@
             "example": "my-awesome-app"
           },
           "repository": {
-            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code. Required when the `source_provider_id` field is informed.",
+            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code.",
             "type": "string",
             "example": "devopness/devopness"
           },
@@ -12724,8 +13137,8 @@
           "servers": {
             "$ref": "#/components/schemas/ServerList"
           },
-          "source_provider": {
-            "$ref": "#/components/schemas/SourceProvider"
+          "credential": {
+            "$ref": "#/components/schemas/Credential"
           },
           "virtual_hosts": {
             "$ref": "#/components/schemas/VirtualHostList"
@@ -12765,7 +13178,7 @@
           "last_deployments",
           "environment",
           "servers",
-          "source_provider",
+          "credential",
           "virtual_hosts",
           "daemons",
           "created_at",
@@ -12801,12 +13214,12 @@
             "type": "string"
           },
           "repository": {
-            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code. Required when the `source_provider_id` field is informed. Must not be greater than 100 characters.",
+            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code. Must not be greater than 100 characters.",
             "example": "devopness/devopness",
             "type": "string"
           },
-          "source_provider_id": {
-            "description": "Numeric ID of the source provider account where the repository is hosted. Required when the `repository` field is informed.",
+          "credential_id": {
+            "description": "Numeric ID of the credential to source provider where the repository is hosted.",
             "example": 9732156,
             "type": "integer"
           },
@@ -12837,7 +13250,7 @@
           "framework",
           "programming_language",
           "repository",
-          "source_provider_id",
+          "credential_id",
           "default_branch"
         ]
       },
@@ -12927,7 +13340,7 @@
             "example": "my-awesome-app"
           },
           "repository": {
-            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code. Required when the `source_provider_id` field is informed.",
+            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code.",
             "type": "string",
             "example": "devopness/devopness"
           },
@@ -12986,8 +13399,8 @@
           "last_deployments": {
             "$ref": "#/components/schemas/ApplicationLastDeployments"
           },
-          "source_provider": {
-            "$ref": "#/components/schemas/SourceProvider"
+          "credential": {
+            "$ref": "#/components/schemas/Credential"
           },
           "created_at": {
             "description": "The date and time when the record was created",
@@ -13056,12 +13469,12 @@
             "type": "string"
           },
           "repository": {
-            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code. Required when the `source_provider_id` field is informed. Must not be greater than 100 characters.",
+            "description": "The full name of a repository (`repository_owner/repository_name`) containing the application source code. Must not be greater than 100 characters.",
             "example": "devopness/devopness",
             "type": "string"
           },
-          "source_provider_id": {
-            "description": "Numeric ID of the source provider account where the repository is hosted. This field is required when <code>repository</code> is present.",
+          "credential_id": {
+            "description": "Numeric ID of the credential to source provider where the repository is hosted. This field is required when <code>repository</code> is present.",
             "example": 9732156,
             "type": "integer"
           },
@@ -13190,6 +13603,28 @@
         "items": {
           "$ref": "#/components/schemas/BlueprintService"
         }
+      },
+      "CloudCredentialSetting": {
+        "type": "object",
+        "properties": {
+          "credential": {
+            "description": "Cloud provider credential",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CredentialAws"
+              },
+              {
+                "$ref": "#/components/schemas/CredentialDigitalOcean"
+              },
+              {
+                "$ref": "#/components/schemas/CredentialGoogleCloud"
+              }
+            ]
+          }
+        },
+        "required": [
+          "credential"
+        ]
       },
       "CloudInstanceList": {
         "type": "array",
@@ -13369,54 +13804,6 @@
           "$ref": "#/components/schemas/CloudProviderInputSettings"
         }
       },
-      "CloudProviderOptionsList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/CloudProviderOptionsRelation"
-        }
-      },
-      "CloudProviderOptionsRelation": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "$ref": "#/components/schemas/StaticCloudProviderCode"
-          },
-          "name": {
-            "description": "Cloud provider name",
-            "type": "string",
-            "example": "Amazon Web Services"
-          },
-          "hint": {
-            "description": "Text describing what is the provider",
-            "type": "string",
-            "example": "Cloud services provided by Amazon Web Services"
-          },
-          "logo_url": {
-            "description": "The provider's logo URL",
-            "type": "string",
-            "example": "https://assets.devopness.com/images/icons/cloud-providers/aws.svg"
-          },
-          "supported_resource_types": {
-            "$ref": "#/components/schemas/CloudResourceTypeList"
-          },
-          "cloud_services": {
-            "$ref": "#/components/schemas/CloudProviderServiceList"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/CloudProviderSettingsList"
-          }
-        },
-        "required": [
-          "code",
-          "name",
-          "hint",
-          "logo_url",
-          "supported_resource_types",
-          "cloud_services",
-          "settings"
-        ],
-        "nullable": true
-      },
       "CloudProviderPropertyType": {
         "type": "string",
         "enum": [
@@ -13503,8 +13890,8 @@
             "type": "string",
             "example": "Amazon Elastic Compute Cloud"
           },
-          "cloud_provider": {
-            "$ref": "#/components/schemas/CloudProviderRelation"
+          "provider": {
+            "$ref": "#/components/schemas/ProviderRelation"
           },
           "regions": {
             "$ref": "#/components/schemas/CloudProviderServiceRegionList"
@@ -13516,7 +13903,7 @@
         "required": [
           "code",
           "name",
-          "cloud_provider"
+          "provider"
         ]
       },
       "CloudProviderServiceCode": {
@@ -13805,49 +14192,55 @@
         "type": "object",
         "properties": {
           "id": {
-            "description": "The unique ID of the cloud provider credential",
+            "description": "The unique ID of the credential",
             "type": "integer",
-            "example": 342390
-          },
-          "created_by": {
-            "description": "The user id that created the credential",
-            "type": "integer",
-            "example": 453891
+            "example": 85324
           },
           "name": {
             "description": "The name of the credential",
             "type": "string",
-            "example": "My credential of AWS cloud provider"
+            "example": "My cool credential"
           },
-          "cloud_provider_code": {
-            "$ref": "#/components/schemas/CloudProviderCode"
+          "provider": {
+            "$ref": "#/components/schemas/ProviderRelation"
           },
-          "cloud_provider": {
-            "$ref": "#/components/schemas/CloudProvider"
+          "type": {
+            "description": "The type of the credential",
+            "type": "string",
+            "example": "cloud_provider"
+          },
+          "type_human_readable": {
+            "description": "The human readable version of the type of the credential",
+            "type": "string",
+            "example": "Cloud Provider"
           },
           "active": {
             "description": "If this credential is active or not",
             "type": "boolean",
             "example": true
           },
+          "created_by_user": {
+            "$ref": "#/components/schemas/UserRelation"
+          },
           "created_at": {
             "description": "The date and time when the record was created",
             "type": "string",
-            "example": "2022-09-26T15:30:31.000000Z"
+            "example": "2019-09-25T15:50:48.000000Z"
           },
           "updated_at": {
             "description": "The date and time when the record was last updated",
             "type": "string",
-            "example": "2022-09-26T15:30:58.000000Z"
+            "example": "2019-09-25T15:50:48.000000Z"
           }
         },
         "required": [
           "id",
-          "created_by",
           "name",
-          "cloud_provider_code",
-          "cloud_provider",
+          "provider",
+          "type",
+          "type_human_readable",
           "active",
+          "created_by_user",
           "created_at",
           "updated_at"
         ]
@@ -13871,22 +14264,159 @@
           "secret"
         ]
       },
-      "CredentialCloudProviderCreate": {
+      "CredentialCloudInputSetting": {
         "type": "object",
+        "description": "A input setting for credential cloud provider",
         "properties": {
           "name": {
-            "description": "A name to uniquely identify this cloud provider credential. Must not be greater than 255 characters.",
-            "example": "AWS production account",
-            "type": "string"
+            "type": "string",
+            "description": "The name of the input setting",
+            "example": "access_key"
           },
-          "settings": {
-            "$ref": "#/components/schemas/CredentialSetting"
+          "name_human_readable": {
+            "type": "string",
+            "description": "The human readable version of the input setting name",
+            "example": "Access Key"
+          },
+          "validation": {
+            "type": "object",
+            "description": "The validation of the input setting",
+            "properties": {
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "min": {
+                "type": "integer",
+                "example": 10
+              },
+              "max": {
+                "type": "integer",
+                "example": 20
+              },
+              "allowed_values": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          },
+          "default_value": {
+            "type": "string",
+            "description": "The default value of the input setting",
+            "example": null,
+            "nullable": true
+          },
+          "sensitive": {
+            "type": "boolean",
+            "description": "Defines if the input setting data is a sensitive content",
+            "example": false
           }
         },
         "required": [
           "name",
-          "settings"
+          "name_human_readable",
+          "validation",
+          "default_value",
+          "sensitive"
         ]
+      },
+      "CredentialCloudInputSettingList": {
+        "type": "array",
+        "description": "The list of input settings for credential cloud provider",
+        "items": {
+          "$ref": "#/components/schemas/CredentialCloudInputSetting"
+        }
+      },
+      "CredentialCloudServiceList": {
+        "type": "array",
+        "description": "The list of cloud services for credential cloud provider",
+        "items": {
+          "$ref": "#/components/schemas/CredentialCloudServiceType"
+        }
+      },
+      "CredentialCloudServiceType": {
+        "type": "object",
+        "description": "A cloud service for credential cloud provider",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code of the cloud service",
+            "example": "aws-ec2"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the cloud service",
+            "example": "Amazon Elastic Compute Cloud"
+          },
+          "cloud_provider": {
+            "$ref": "#/components/schemas/CredentialProviderType"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "cloud_provider"
+        ]
+      },
+      "CredentialCloudType": {
+        "type": "object",
+        "description": "A credential cloud provider",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code of the cloud provider",
+            "example": "aws"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the cloud provider",
+            "example": "Amazon Web Services"
+          },
+          "hint": {
+            "type": "string",
+            "description": "Text describing the cloud provider",
+            "example": "Cloud services provided by Amazon Web Services"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the cloud provider",
+            "example": "cloud_provider"
+          },
+          "type_human_readable": {
+            "type": "string",
+            "description": "The human readable version of the cloud provider type",
+            "example": "Cloud Provider"
+          },
+          "cloud_services": {
+            "$ref": "#/components/schemas/CredentialCloudServiceList"
+          },
+          "input_settings": {
+            "$ref": "#/components/schemas/CredentialCloudInputSettingList"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "hint",
+          "type",
+          "type_human_readable",
+          "cloud_services",
+          "input_settings"
+        ]
+      },
+      "CredentialCloudTypeList": {
+        "type": "array",
+        "description": "The list of cloud providers",
+        "items": {
+          "$ref": "#/components/schemas/CredentialCloudType"
+        }
       },
       "CredentialDigitalOcean": {
         "type": "object",
@@ -13899,6 +14429,41 @@
         },
         "required": [
           "api_token"
+        ]
+      },
+      "CredentialEnvironmentCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the credential. Must not be greater than 60 characters.",
+            "example": "My cool credential",
+            "type": "string"
+          },
+          "provider_code": {
+            "description": "Must not be one of <code>self-hosted</code> Must not be greater than 20 characters.",
+            "example": "b",
+            "type": "string"
+          },
+          "type": {
+            "description": "Must be one of <code>cloud_provider</code> or <code>source_provider</code>.",
+            "example": "source_provider",
+            "type": "string"
+          },
+          "active": {
+            "description": "If this credential is active or not.",
+            "example": false,
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/CredentialInputSettings"
+          }
+        },
+        "required": [
+          "name",
+          "provider_code",
+          "type",
+          "active",
+          "settings"
         ]
       },
       "CredentialGoogleCloud": {
@@ -13914,65 +14479,7 @@
           "service_account_key"
         ]
       },
-      "CredentialList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/CredentialRelation"
-        }
-      },
-      "CredentialRelation": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The unique ID of the given pipeline",
-            "type": "integer",
-            "example": 342390
-          },
-          "created_by": {
-            "description": "The user id that created the credential",
-            "type": "integer",
-            "example": 453891
-          },
-          "name": {
-            "description": "The name of the credential",
-            "type": "string",
-            "example": "My credential of AWS cloud provider"
-          },
-          "cloud_provider_code": {
-            "$ref": "#/components/schemas/CloudProviderCode"
-          },
-          "cloud_provider": {
-            "$ref": "#/components/schemas/CloudProvider"
-          },
-          "active": {
-            "description": "If this credential is active or not",
-            "type": "boolean",
-            "example": true
-          },
-          "created_at": {
-            "description": "The date and time when the record was created",
-            "type": "string",
-            "example": "2022-09-26T15:30:31.000000Z"
-          },
-          "updated_at": {
-            "description": "The date and time when the record was last updated",
-            "type": "string",
-            "example": "2022-09-26T15:30:58.000000Z"
-          }
-        },
-        "required": [
-          "id",
-          "created_by",
-          "name",
-          "cloud_provider_code",
-          "cloud_provider",
-          "active",
-          "created_at",
-          "updated_at"
-        ],
-        "nullable": true
-      },
-      "CredentialSetting": {
+      "CredentialInputSettings": {
         "type": "object",
         "properties": {
           "credential": {
@@ -13986,12 +14493,304 @@
               },
               {
                 "$ref": "#/components/schemas/CredentialGoogleCloud"
+              },
+              {
+                "$ref": "#/components/schemas/CredentialSourceProvider"
               }
             ]
           }
         },
         "required": [
           "credential"
+        ]
+      },
+      "CredentialList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/CredentialRelation"
+        }
+      },
+      "CredentialOptions": {
+        "type": "object",
+        "properties": {
+          "provider_types": {
+            "$ref": "#/components/schemas/ProviderTypeList"
+          },
+          "supported_providers": {
+            "$ref": "#/components/schemas/CredentialProviderTypeList"
+          }
+        },
+        "required": [
+          "provider_types",
+          "supported_providers"
+        ]
+      },
+      "CredentialProviderType": {
+        "type": "object",
+        "description": "A cloud provider for credential cloud service",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code of the cloud provider",
+            "example": "aws"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the cloud provider",
+            "example": "Amazon Web Services"
+          },
+          "hint": {
+            "type": "string",
+            "description": "Text describing the cloud provider",
+            "example": "Cloud services provided by Amazon Web Services"
+          },
+          "type": {
+            "description": "Type of provider.",
+            "type": "string",
+            "enum": [
+              "cloud_provider",
+              "source_provider"
+            ],
+            "example": "cloud_provider"
+          },
+          "type_human_readable": {
+            "description": "Human readable version of provider type",
+            "type": "string",
+            "example": "Cloud Provider"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "hint",
+          "type",
+          "type_human_readable"
+        ]
+      },
+      "CredentialProviderTypeList": {
+        "type": "array",
+        "description": "The list of supported providers",
+        "items": {
+          "$ref": "#/components/schemas/CredentialProviderType"
+        }
+      },
+      "CredentialRelation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique ID of the credential",
+            "type": "integer",
+            "example": 85324
+          },
+          "name": {
+            "description": "The name of the credential",
+            "type": "string",
+            "example": "My cool credential"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ProviderRelation"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ProviderType"
+          },
+          "type_human_readable": {
+            "description": "The human readable version of the type of the credential",
+            "type": "string",
+            "example": "Cloud Provider"
+          },
+          "active": {
+            "description": "If this credential is active or not",
+            "type": "boolean",
+            "example": true
+          },
+          "created_by_user": {
+            "$ref": "#/components/schemas/UserRelation"
+          },
+          "created_at": {
+            "description": "The date and time when the record was created",
+            "type": "string",
+            "example": "2019-09-25T15:50:48.000000Z"
+          },
+          "updated_at": {
+            "description": "The date and time when the record was last updated",
+            "type": "string",
+            "example": "2019-09-25T15:50:48.000000Z"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "provider",
+          "type",
+          "type_human_readable",
+          "active",
+          "created_by_user",
+          "created_at",
+          "updated_at"
+        ],
+        "nullable": true
+      },
+      "CredentialSetting": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/CredentialProviderType"
+          },
+          "environment_id": {
+            "description": "Numeric ID of the environment to which the network belongs to",
+            "type": "integer",
+            "example": 123
+          },
+          "settings": {
+            "$ref": "#/components/schemas/ProviderSettings"
+          }
+        },
+        "required": [
+          "provider",
+          "environment_id",
+          "settings"
+        ]
+      },
+      "CredentialSourceInputSetting": {
+        "type": "object",
+        "description": "A input setting for credential source provider",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the input setting",
+            "example": "callback_code"
+          },
+          "name_human_readable": {
+            "type": "string",
+            "description": "The human readable version of the input setting name",
+            "example": "Callback code"
+          },
+          "sensitive": {
+            "type": "boolean",
+            "description": "Defines if the input setting data is a sensitive content",
+            "example": false
+          },
+          "validation": {
+            "type": "object",
+            "description": "The validation of the input setting",
+            "properties": {
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "min": {
+                "type": "integer",
+                "example": 8
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "name_human_readable",
+          "sensitive",
+          "validation"
+        ]
+      },
+      "CredentialSourceInputSettingList": {
+        "type": "array",
+        "description": "The list of input settings for credential source provider",
+        "items": {
+          "$ref": "#/components/schemas/CredentialSourceInputSetting"
+        }
+      },
+      "CredentialSourceProvider": {
+        "type": "object",
+        "properties": {
+          "callback_code": {
+            "type": "string",
+            "description": "The temporary code forwarded by the OAuth provider as a parameter to our callback URL",
+            "example": "a606964974b5fb082971"
+          }
+        },
+        "required": [
+          "callback_code"
+        ]
+      },
+      "CredentialSourceType": {
+        "type": "object",
+        "description": "A credential source provider",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code of the source provider",
+            "example": "gitlab"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the source provider",
+            "example": "GitLab"
+          },
+          "hint": {
+            "type": "string",
+            "description": "Text describing the source provider",
+            "example": "GitLab source provider"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the source provider",
+            "example": "source_provider"
+          },
+          "type_human_readable": {
+            "type": "string",
+            "description": "The human readable version of the source provider type",
+            "example": "Source Provider"
+          },
+          "connect_url": {
+            "type": "string",
+            "description": "The URL to connect to the source provider",
+            "example": "https://gitlab.com/oauth/authorize?client_id=%3CSET-DEVOPNESS-GITLAB-CLIENT-ID-HERE%3E&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fprofile%2Fsource-providers%2Fadd%3Fprovider%3Dgitlab&scope=read_user+email+api&response_type=code"
+          },
+          "input_settings": {
+            "$ref": "#/components/schemas/CredentialSourceInputSettingList"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "hint",
+          "type",
+          "type_human_readable",
+          "connect_url",
+          "input_settings"
+        ]
+      },
+      "CredentialSourceTypeList": {
+        "type": "array",
+        "description": "The list of source providers",
+        "items": {
+          "$ref": "#/components/schemas/CredentialSourceType"
+        }
+      },
+      "CredentialUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique ID of the given credential.",
+            "example": 123,
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name of the credential. Must not be greater than 60 characters.",
+            "example": "My cool credential",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/CredentialInputSettings"
+          }
+        },
+        "required": [
+          "id",
+          "name"
         ]
       },
       "Credits": {
@@ -14672,6 +15471,9 @@
           "servers": {
             "$ref": "#/components/schemas/ServerList"
           },
+          "credentials": {
+            "$ref": "#/components/schemas/CredentialList"
+          },
           "cron_jobs": {
             "$ref": "#/components/schemas/CronJobList"
           },
@@ -14726,6 +15528,7 @@
           "type_human_readable",
           "is_archived",
           "servers",
+          "credentials",
           "cron_jobs",
           "daemons",
           "networks",
@@ -16259,11 +17062,17 @@
           },
           "provision_input": {
             "$ref": "#/components/schemas/NetworkProvisionInput"
+          },
+          "credential_id": {
+            "description": "The ID of the cloud credential.",
+            "example": 123,
+            "type": "integer"
           }
         },
         "required": [
           "name",
-          "provision_input"
+          "provision_input",
+          "credential_id"
         ]
       },
       "NetworkList": {
@@ -16279,18 +17088,12 @@
           "cloud_service_code": {
             "$ref": "#/components/schemas/ServerCloudServiceCode"
           },
-          "credential_id": {
-            "type": "integer",
-            "description": "The ID of the cloud credential",
-            "example": 123
-          },
           "settings": {
             "$ref": "#/components/schemas/NetworkProvisionInputSettings"
           }
         },
         "required": [
           "cloud_service_code",
-          "credential_id",
           "settings"
         ]
       },
@@ -16669,6 +17472,25 @@
           "name",
           "direction",
           "cidr_block"
+        ]
+      },
+      "NetworkUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID of the network.",
+            "example": 123,
+            "type": "integer"
+          },
+          "credential_id": {
+            "description": "The ID of the cloud credential.",
+            "example": 123,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "credential_id"
         ]
       },
       "OperatingSystem": {
@@ -17412,6 +18234,97 @@
           "name"
         ]
       },
+      "ProviderCode": {
+        "description": "The code of the service provider",
+        "type": "string",
+        "enum": [
+          "aws",
+          "bitbucket",
+          "digitalocean",
+          "gcp",
+          "github",
+          "gitlab"
+        ],
+        "example": "aws"
+      },
+      "ProviderRelation": {
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "description": "Tells if the provider is active or not"
+          },
+          "code": {
+            "$ref": "#/components/schemas/ProviderCode"
+          },
+          "code_human_readable": {
+            "description": "Human readable version of provider code",
+            "type": "string",
+            "example": "Amazon Web Services"
+          },
+          "type": {
+            "description": "Type of provider.",
+            "type": "string",
+            "enum": [
+              "cloud_provider",
+              "source_provider"
+            ],
+            "example": "cloud_provider"
+          },
+          "type_human_readable": {
+            "description": "Human readable version of provider type",
+            "type": "string",
+            "example": "Cloud Provider"
+          }
+        },
+        "required": [
+          "active",
+          "code_human_readable",
+          "code",
+          "type"
+        ]
+      },
+      "ProviderSettings": {
+        "type": "object",
+        "description": "Settings of supported provider",
+        "properties": {
+          "connect_url": {
+            "type": "string",
+            "description": "The URL to connect to the source provider",
+            "example": "https://gitlab.com/oauth/authorize?client_id=%3CSET-DEVOPNESS-GITLAB-CLIENT-ID-HERE%3E&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fprofile%2Fsource-providers%2Fadd%3Fprovider%3Dgitlab&scope=read_user+email+api&response_type=code"
+          },
+          "input_settings": {
+            "$ref": "#/components/schemas/CredentialCloudInputSettingList"
+          }
+        },
+        "required": [
+          "input_settings"
+        ]
+      },
+      "ProviderType": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "cloud_provider"
+          },
+          "type_human_readable": {
+            "type": "string",
+            "example": "Cloud Provider"
+          }
+        },
+        "required": [
+          "type",
+          "type_human_readable"
+        ]
+      },
+      "ProviderTypeList": {
+        "type": "array",
+        "description": "The list of supported provider types",
+        "items": {
+          "$ref": "#/components/schemas/ProviderType"
+        }
+      },
       "RelatedAction": {
         "description": "Action related to another action",
         "type": "object",
@@ -17474,45 +18387,6 @@
           "$ref": "#/components/schemas/RelatedAction"
         }
       },
-      "Repository": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the repository",
-            "type": "string",
-            "example": "myrepo"
-          },
-          "user_name": {
-            "description": "The name of the user/account on the Version Control System",
-            "type": "string",
-            "example": "myusername"
-          },
-          "full_name": {
-            "description": "The fully qualified repository name. Usually composed of user_name/name",
-            "type": "string",
-            "example": "myusername/myrepo"
-          },
-          "html_url": {
-            "description": "The URL for viewing repository details on the provider's web application",
-            "type": "string",
-            "example": "https://github.com/myusername/myrepo"
-          },
-          "branches": {
-            "$ref": "#/components/schemas/RepositoryBranchList"
-          },
-          "tags": {
-            "$ref": "#/components/schemas/RepositoryTagList"
-          }
-        },
-        "required": [
-          "name",
-          "user_name",
-          "full_name",
-          "html_url",
-          "branches",
-          "tags"
-        ]
-      },
       "RepositoryBranch": {
         "description": "A repository branch",
         "type": "object",
@@ -17543,44 +18417,6 @@
         "items": {
           "$ref": "#/components/schemas/RepositoryBranch"
         }
-      },
-      "RepositoryList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/RepositoryRelation"
-        }
-      },
-      "RepositoryRelation": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the repository",
-            "type": "string",
-            "example": "myrepo"
-          },
-          "user_name": {
-            "description": "The name of the user/account on the Version Control System",
-            "type": "string",
-            "example": "myusername"
-          },
-          "full_name": {
-            "description": "The fully qualified repository name. Usually composed of user_name/name",
-            "type": "string",
-            "example": "myusername/myrepo"
-          },
-          "html_url": {
-            "description": "The URL for viewing repository details on the provider's web application",
-            "type": "string",
-            "example": "https://github.com/myusername/myrepo"
-          }
-        },
-        "required": [
-          "name",
-          "user_name",
-          "full_name",
-          "html_url"
-        ],
-        "nullable": true
       },
       "RepositoryTag": {
         "description": "A repository tag",
@@ -17859,6 +18695,7 @@
         "type": "string",
         "enum": [
           "application",
+          "credential",
           "cronjob",
           "daemon",
           "deployment",
@@ -18362,6 +19199,11 @@
           },
           "provision_input": {
             "$ref": "#/components/schemas/ServerProvisionInput"
+          },
+          "credential_id": {
+            "description": "The ID of the cloud credential. This field is required unless <code>provision_input.cloud_service_code</code> is in <code>self-hosted-custom</code>.",
+            "example": 123,
+            "type": "string"
           }
         },
         "required": [
@@ -18390,11 +19232,6 @@
         "type": "object",
         "description": "Configuration used to launch cloud instance",
         "properties": {
-          "credential_id": {
-            "type": "integer",
-            "description": "The unique id of the cloud provider credential to be used on connect to cloud provider",
-            "example": 8430015757
-          },
           "subnet_id": {
             "type": "integer",
             "description": "The ID of the subnet where to create the server. If not defined, create the server on the default subnet of the cloud provider",
@@ -18521,7 +19358,7 @@
             "type": "string"
           },
           "ssh_port": {
-            "description": "The network port to which the SSH daemon is listening to SSH connections on the server. Must be between 0 and 65535.",
+            "description": "The network port to which the SSH daemon is listening to SSH connections on the server. Must be between 22 and 65535.",
             "example": 22,
             "type": "integer"
           },
@@ -18529,6 +19366,11 @@
             "description": "Maximum number of actions that can run in parallel on this server. `0` means no limit of simultaneous actions. `1` means just a single action will be started at a time to run on this server. Must be between 0 and 10.",
             "example": 1,
             "type": "integer"
+          },
+          "credential_id": {
+            "description": "The ID of the cloud credential.",
+            "example": 123,
+            "type": "string"
           }
         },
         "required": [
@@ -19056,75 +19898,6 @@
           "connect_url"
         ]
       },
-      "SourceProvider": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The unique ID of the given source provider",
-            "type": "integer",
-            "example": 45678
-          },
-          "user_id": {
-            "description": "The current user's ID",
-            "type": "integer",
-            "example": 6589
-          },
-          "provider": {
-            "$ref": "#/components/schemas/SourceProviderName"
-          },
-          "provider_human_readable": {
-            "$ref": "#/components/schemas/SourceProviderDisplayableName"
-          },
-          "provider_user_nickname": {
-            "description": "The nickname of the user on the Source Authentication provider",
-            "type": "string",
-            "example": "Joe Smith"
-          },
-          "token_expires_at": {
-            "description": "The date and time indicating when the authentication token will expire at",
-            "type": "string",
-            "example": "2020-09-25T15:50:48.000000Z",
-            "nullable": true
-          },
-          "created_at": {
-            "description": "The date and time when the record was created",
-            "type": "string",
-            "example": "2019-09-25T13:22:37.000000Z"
-          },
-          "updated_at": {
-            "description": "The date and time when the record was last updated",
-            "type": "string",
-            "example": "2019-09-25T13:22:37.000000Z"
-          }
-        },
-        "required": [
-          "id",
-          "user_id",
-          "provider",
-          "provider_human_readable",
-          "provider_user_nickname",
-          "token_expires_at",
-          "created_at",
-          "updated_at"
-        ]
-      },
-      "SourceProviderCreate": {
-        "type": "object",
-        "properties": {
-          "provider": {
-            "$ref": "#/components/schemas/SourceProviderName"
-          },
-          "callback_code": {
-            "description": "The temporary code forwarded by the OAuth provider as a parameter to our callback URL. Must be at least 8 characters.",
-            "example": "a606964974b5fb082971",
-            "type": "string"
-          }
-        },
-        "required": [
-          "provider",
-          "callback_code"
-        ]
-      },
       "SourceProviderDisplayableName": {
         "type": "string",
         "description": "A formatted version of the `provider` field value, aligned with the provider's name branding",
@@ -19135,12 +19908,6 @@
         ],
         "example": "Bitbucket"
       },
-      "SourceProviderList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/SourceProviderRelation"
-        }
-      },
       "SourceProviderName": {
         "type": "string",
         "description": "The name of the source code provider",
@@ -19150,87 +19917,6 @@
           "gitlab"
         ],
         "example": "bitbucket"
-      },
-      "SourceProviderOptionsList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/SourceProviderOptionsRelation"
-        }
-      },
-      "SourceProviderOptionsRelation": {
-        "type": "object",
-        "properties": {
-          "provider_name": {
-            "$ref": "#/components/schemas/SourceProviderName"
-          },
-          "provider_name_human_readable": {
-            "$ref": "#/components/schemas/SourceProviderDisplayableName"
-          },
-          "connect_url": {
-            "description": "URL of the connection",
-            "type": "string",
-            "example": "https://gitlab.com/oauth/authorize"
-          }
-        },
-        "required": [
-          "provider_name",
-          "provider_name_human_readable",
-          "connect_url"
-        ],
-        "nullable": true
-      },
-      "SourceProviderRelation": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The ID of the given source provider",
-            "type": "integer",
-            "example": 85324
-          },
-          "user_id": {
-            "description": "The current user's ID",
-            "type": "integer",
-            "example": 6589
-          },
-          "provider": {
-            "$ref": "#/components/schemas/SourceProviderName"
-          },
-          "provider_human_readable": {
-            "$ref": "#/components/schemas/SourceProviderDisplayableName"
-          },
-          "provider_user_nickname": {
-            "description": "The nickname of the user on the Source Authentication provider",
-            "type": "string",
-            "example": "Joe Smith"
-          },
-          "token_expires_at": {
-            "description": "The date and time indicating when the authentication token will expire at",
-            "type": "string",
-            "example": "2020-09-25T15:50:48.000000Z",
-            "nullable": true
-          },
-          "created_at": {
-            "description": "The date and time when the record was created",
-            "type": "string",
-            "example": "2019-09-25T15:50:48.000000Z"
-          },
-          "updated_at": {
-            "description": "The date and time when the record was last updated",
-            "type": "string",
-            "example": "2019-09-25T15:50:48.000000Z"
-          }
-        },
-        "required": [
-          "id",
-          "user_id",
-          "provider",
-          "provider_human_readable",
-          "provider_user_nickname",
-          "token_expires_at",
-          "created_at",
-          "updated_at"
-        ],
-        "nullable": true
       },
       "SourceType": {
         "type": "string",
@@ -20157,29 +20843,29 @@
           },
           "provision_input": {
             "$ref": "#/components/schemas/SubnetProvisionInput"
+          },
+          "credential_id": {
+            "description": "The ID of the cloud credential.",
+            "example": 123,
+            "type": "integer"
           }
         },
         "required": [
           "name",
           "type",
-          "provision_input"
+          "provision_input",
+          "credential_id"
         ]
       },
       "SubnetProvisionInput": {
         "type": "object",
         "description": "Subnet provision input parameters",
         "properties": {
-          "credential_id": {
-            "type": "integer",
-            "description": "The ID of the cloud credential",
-            "example": 123
-          },
           "settings": {
             "$ref": "#/components/schemas/SubnetProvisionInputSettings"
           }
         },
         "required": [
-          "credential_id",
           "settings"
         ]
       },
