@@ -2197,6 +2197,26 @@
               "type": "integer",
               "minimum": 1
             }
+          },
+          {
+            "in": "query",
+            "name": "provider",
+            "description": "Filter by credential provider.",
+            "example": "aws",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Filter by credential type.",
+            "example": "cloud_provider",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
