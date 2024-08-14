@@ -1063,6 +1063,137 @@
         }
       }
     },
+    "/credentials/{credential_id}/repositories": {
+      "get": {
+        "summary": "Return a list of all repositories belonging to the source provider linked to the credential",
+        "operationId": "listCredentialRepositories",
+        "description": {
+          "$ref": "../spec/descriptions/list-credential-repositories.md"
+        },
+        "tags": [
+          "Credentials - Repositories"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize"
+          },
+          {
+            "in": "path",
+            "name": "credential_id",
+            "description": "The ID of the credential.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepositoryList"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden/Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credentials/{credential_id}/repositories/{repository_owner}/{repository_name}": {
+      "get": {
+        "summary": "Get details of a repository by its name",
+        "operationId": "getCredentialRepository",
+        "description": {
+          "$ref": "../spec/descriptions/get-credential-repository.md"
+        },
+        "tags": [
+          "Credentials - Repositories"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/acceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/authHeader"
+          },
+          {
+            "$ref": "#/components/parameters/contentTypeHeader"
+          },
+          {
+            "in": "path",
+            "name": "credential_id",
+            "description": "The ID of the credential.",
+            "example": 123,
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "path",
+            "name": "repository_name",
+            "description": "The repository name",
+            "example": "repo_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "repository_owner",
+            "description": "The owner of the repository",
+            "example": "repo_owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Repository"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found"
+          }
+        }
+      }
+    },
     "/cron-jobs/{cron_job_id}": {
       "delete": {
         "summary": "Delete a given Cron Job",
@@ -18417,6 +18548,45 @@
           "$ref": "#/components/schemas/RelatedAction"
         }
       },
+      "Repository": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the repository",
+            "type": "string",
+            "example": "myrepo"
+          },
+          "user_name": {
+            "description": "The name of the user/account on the Version Control System",
+            "type": "string",
+            "example": "myusername"
+          },
+          "full_name": {
+            "description": "The fully qualified repository name. Usually composed of user_name/name",
+            "type": "string",
+            "example": "myusername/myrepo"
+          },
+          "html_url": {
+            "description": "The URL for viewing repository details on the provider's web application",
+            "type": "string",
+            "example": "https://github.com/myusername/myrepo"
+          },
+          "branches": {
+            "$ref": "#/components/schemas/RepositoryBranchList"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/RepositoryTagList"
+          }
+        },
+        "required": [
+          "name",
+          "user_name",
+          "full_name",
+          "html_url",
+          "branches",
+          "tags"
+        ]
+      },
       "RepositoryBranch": {
         "description": "A repository branch",
         "type": "object",
@@ -18447,6 +18617,44 @@
         "items": {
           "$ref": "#/components/schemas/RepositoryBranch"
         }
+      },
+      "RepositoryList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RepositoryRelation"
+        }
+      },
+      "RepositoryRelation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the repository",
+            "type": "string",
+            "example": "myrepo"
+          },
+          "user_name": {
+            "description": "The name of the user/account on the Version Control System",
+            "type": "string",
+            "example": "myusername"
+          },
+          "full_name": {
+            "description": "The fully qualified repository name. Usually composed of user_name/name",
+            "type": "string",
+            "example": "myusername/myrepo"
+          },
+          "html_url": {
+            "description": "The URL for viewing repository details on the provider's web application",
+            "type": "string",
+            "example": "https://github.com/myusername/myrepo"
+          }
+        },
+        "required": [
+          "name",
+          "user_name",
+          "full_name",
+          "html_url"
+        ],
+        "nullable": true
       },
       "RepositoryTag": {
         "description": "A repository tag",
