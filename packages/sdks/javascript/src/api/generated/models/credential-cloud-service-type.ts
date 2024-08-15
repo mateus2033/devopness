@@ -37,6 +37,6 @@ export interface CredentialCloudServiceType {
      * @type {CredentialProviderType}
      * @memberof CredentialCloudServiceType
      */
-    cloud_provider: CredentialProviderType;
+    cloud_provider?: CredentialProviderType;
 }
 

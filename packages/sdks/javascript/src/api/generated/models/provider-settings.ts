@@ -13,6 +13,7 @@
 
 
 import { CredentialCloudInputSetting } from './credential-cloud-input-setting';
+import { CredentialCloudServiceType } from './credential-cloud-service-type';
 
 /**
  * Settings of supported provider
@@ -32,5 +33,11 @@ export interface ProviderSettings {
      * @memberof ProviderSettings
      */
     input_settings: Array<CredentialCloudInputSetting>;
+    /**
+     * The list of cloud services for credential cloud provider
+     * @type {Array<CredentialCloudServiceType>}
+     * @memberof ProviderSettings
+     */
+    cloud_services?: Array<CredentialCloudServiceType>;
 }
 

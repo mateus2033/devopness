@@ -14512,8 +14512,7 @@
         },
         "required": [
           "code",
-          "name",
-          "cloud_provider"
+          "name"
         ]
       },
       "CredentialCloudType": {
@@ -18450,6 +18449,9 @@
           },
           "input_settings": {
             "$ref": "#/components/schemas/CredentialCloudInputSettingList"
+          },
+          "cloud_services": {
+            "$ref": "#/components/schemas/CredentialCloudServiceList"
           }
         },
         "required": [
