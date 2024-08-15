@@ -67,6 +67,7 @@ export * from './credential-options';
 export * from './credential-provider-type';
 export * from './credential-relation';
 export * from './credential-setting';
+export * from './credential-settings-cloud-services';
 export * from './credential-source-input-setting';
 export * from './credential-source-input-setting-validation';
 export * from './credential-source-provider';

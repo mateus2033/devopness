@@ -14506,11 +14506,8 @@
             "description": "The name of the cloud service",
             "example": "Amazon Elastic Compute Cloud"
           },
-          "regions": {
-            "$ref": "#/components/schemas/CloudProviderServiceRegionList"
-          },
-          "resource_types": {
-            "$ref": "#/components/schemas/CloudProviderServiceResourceTypeList"
+          "cloud_services": {
+            "$ref": "#/components/schemas/CredentialSettingsCloudServices"
           }
         },
         "required": [
@@ -14802,6 +14799,21 @@
           "provider",
           "environment_id",
           "settings"
+        ]
+      },
+      "CredentialSettingsCloudServices": {
+        "type": "object",
+        "properties": {
+          "regions": {
+            "$ref": "#/components/schemas/CloudProviderServiceRegionList"
+          },
+          "resource_types": {
+            "$ref": "#/components/schemas/CloudProviderServiceResourceTypeList"
+          }
+        },
+        "required": [
+          "regions",
+          "resource_types"
         ]
       },
       "CredentialSourceInputSetting": {
