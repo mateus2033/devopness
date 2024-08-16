@@ -12,7 +12,8 @@
  */
 
 
-import { CredentialSettingsCloudServices } from './credential-settings-cloud-services';
+import { CloudProviderServiceRegion } from './cloud-provider-service-region';
+import { CloudProviderServiceResourceType } from './cloud-provider-service-resource-type';
 
 /**
  * A cloud service for credential cloud provider
@@ -34,9 +35,15 @@ export interface CredentialCloudServiceType {
     name: string;
     /**
      * 
-     * @type {CredentialSettingsCloudServices}
+     * @type {Array<CloudProviderServiceRegion>}
      * @memberof CredentialCloudServiceType
      */
-    cloud_services?: CredentialSettingsCloudServices;
+    regions?: Array<CloudProviderServiceRegion>;
+    /**
+     * 
+     * @type {Array<CloudProviderServiceResourceType>}
+     * @memberof CredentialCloudServiceType
+     */
+    resource_types?: Array<CloudProviderServiceResourceType>;
 }
 
